@@ -20,8 +20,8 @@ export default class Layout extends Component {
           <link rel="icon" href="/src/KeelSlip_Icon.png"></link>
           <meta
             http-equiv="Content-Security-Policy"
-            content="block-all-mixed-content"
-          ></meta>
+            content="upgrade-insecure-requests"
+          />
         </Head>
         <div className="navbar">
           <Navbar />
