@@ -1,0 +1,156 @@
+{
+	"info": {
+		"_postman_id": "898a2b3e-00ae-4b53-b289-184ee541a9fe",
+		"name": "Receipt",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET all receipts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3003/api/receipt/receipts/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"api",
+						"receipt",
+						"receipts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET receipt by KeepSlip receipt id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3003/api/receipt/receipt/S1I29",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"api",
+						"receipt",
+						"receipt",
+						"S1I29"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET receipt by customer id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3003/api/receipt/receiptByCustomer/123",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"api",
+						"receipt",
+						"receiptByCustomer",
+						"123"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET receipt by stoer id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3003/api/receipt/receiptByStore/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"api",
+						"receipt",
+						"receiptByStore",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST receipt",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Customer_id\":\"123\",\n    \"Store_id\":\"1\",\n    \"Receipt_id\":\"29\"\n }"
+				},
+				"url": {
+					"raw": "http://localhost:3003/api/receipt/receipt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"api",
+						"receipt",
+						"receipt"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE receipt by KeepSlip receipt id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3003/api/receipt/receipt/S1I20",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"api",
+						"receipt",
+						"receipt",
+						"S1I20"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

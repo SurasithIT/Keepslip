@@ -1,0 +1,19 @@
+POST http://localhost:3007/api/auth/customer-login
+Content-Type: application/json
+
+{
+    "username": "Surasith",
+    "password": "1234"
+}
+
+###
+POST http://localhost:3007/api/auth/store-login
+Content-Type: application/json
+
+{
+    "username": "A-HOST",
+    "password": "12345"
+}
+
+###
+DELETE http://localhost:3007/api/auth/logout
