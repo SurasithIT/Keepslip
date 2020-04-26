@@ -8,7 +8,7 @@ services:
     volumes:
       - ./nginx/:/etc/nginx/conf.d/
     networks:
-      testing_net:
+      keepslip_network:
         ipv4_address: 172.28.1.9
 
   keepslip-db:
@@ -23,7 +23,7 @@ services:
     volumes:
       - ./data/:/var/lib/mysql
     networks:
-      testing_net:
+      keepslip_network:
         ipv4_address: 172.28.1.10
 
   customer:
@@ -45,7 +45,7 @@ services:
       - /usr/src/app/node_modules
       - ./Customer/:/usr/src/app/
     networks:
-      testing_net:
+      keepslip_network:
         ipv4_address: 172.28.1.1
 
   store:
@@ -67,7 +67,7 @@ services:
       - /usr/src/app/node_modules
       - ./Store/:/usr/src/app/
     networks:
-      testing_net:
+      keepslip_network:
         ipv4_address: 172.28.1.2
 
   receipt:
@@ -89,7 +89,7 @@ services:
       - /usr/src/app/node_modules
       - ./Receipt/:/usr/src/app/
     networks:
-      testing_net:
+      keepslip_network:
         ipv4_address: 172.28.1.3
 
   smart-contract:
@@ -103,7 +103,7 @@ services:
       - /usr/src/app/node_modules
       - ./SmartContract/:/usr/src/app/
     networks:
-      testing_net:
+      keepslip_network:
         ipv4_address: 172.28.1.4
 
   the-revenue-department:
@@ -117,7 +117,7 @@ services:
       - /usr/src/app/node_modules
       - ./TheRevenueDepartment/:/usr/src/app/
     networks:
-      testing_net:
+      keepslip_network:
         ipv4_address: 172.28.1.5
 
   receipt-from-store:
@@ -139,7 +139,7 @@ services:
       - /usr/src/app/node_modules
       - ./ReceiptFromStore/:/usr/src/app/
     networks:
-      testing_net:
+      keepslip_network:
         ipv4_address: 172.28.1.6
 
   auth:
@@ -161,7 +161,7 @@ services:
       - /usr/src/app/node_modules
       - ./auth/:/usr/src/app/
     networks:
-      testing_net:
+      keepslip_network:
         ipv4_address: 172.28.1.7
 
   client:
@@ -180,11 +180,11 @@ services:
       - /usr/src/app/node_modules
       - ./client/:/usr/src/app/
     networks:
-      testing_net:
+      keepslip_network:
         ipv4_address: 172.28.1.8
 
 networks:
-  testing_net:
+  keepslip_network:
     ipam:
       driver: default
       config:
