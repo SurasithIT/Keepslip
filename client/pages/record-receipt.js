@@ -34,13 +34,13 @@ RecordReceipt.getInitialProps = async (ctx) => {
   console.log(KSa);
   let user;
   if (KSa) {
-    let userVerify = await fetch(`http://172.28.1.9:8080/auth/store-verify`, {
+    let userVerify = await fetch(`http://api.keepslip.com/auth/store-verify`, {
       headers: { Authorization: `${KSa}` },
     });
     user = await userVerify.json();
     if (!user.error) {
       let storeFetch = await fetch(
-        `http://172.28.1.9:8080/store/store/${user.user_id}`
+        `http://api.keepslip.com/store/store/${user.user_id}`
       );
       let store = await storeFetch.json();
       console.log(store[0]);

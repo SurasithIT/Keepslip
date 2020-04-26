@@ -15,7 +15,7 @@ Home.getInitialProps = async (ctx) => {
   console.log(KSa);
   let user;
   if (KSa) {
-    let userVerify = await fetch(`http://172.28.1.9:8080/auth/verify`, {
+    let userVerify = await fetch(`http://api.keepslip.com/auth/verify`, {
       headers: { Authorization: `${KSa}` },
     });
     user = await userVerify.json();

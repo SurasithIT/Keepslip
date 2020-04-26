@@ -23,7 +23,7 @@ export default class Navbar extends Component {
     console.log(KSa);
     let user;
     if (KSa) {
-      let userVerify = await fetch(`http://172.28.1.9:8080/auth/verify`, {
+      let userVerify = await fetch(`http://api.keepslip.com/auth/verify`, {
         headers: { Authorization: `${KSa}` },
       });
       user = await userVerify.json();
@@ -73,7 +73,7 @@ export default class Navbar extends Component {
 
     register.active.postMessage(JSON.stringify({ status: "clear" }));
     cookie.remove("KSa");
-    let uri = `http://172.28.1.9:8080/auth/logout`;
+    let uri = `http://api.keepslip.com/auth/logout`;
     let option = { method: "DELETE" };
     let sendData = await fetch(uri, option);
     let result = await sendData.json();
