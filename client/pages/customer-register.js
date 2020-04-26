@@ -30,9 +30,12 @@ export default class CustomerRegister extends Component {
     console.log(KSa);
     let user;
     if (KSa) {
-      let userVerify = await fetch(`http://api.keepslip.com/auth/verify`, {
-        headers: { Authorization: `${KSa}` },
-      });
+      let userVerify = await fetch(
+        `http://${process.env.API_PATH}/auth/verify`,
+        {
+          headers: { Authorization: `${KSa}` },
+        }
+      );
       user = await userVerify.json();
       console.log(user);
       // return user;
@@ -51,7 +54,7 @@ export default class CustomerRegister extends Component {
   register = async (e) => {
     e.preventDefault();
     if (this.state.password === this.state.rePassword) {
-      let uri = `http://api.keepslip.com/customer/customer/`;
+      let uri = `http://${process.env.API_PATH}/customer/customer/`;
       let option = {
         method: "POST",
         body: JSON.stringify({

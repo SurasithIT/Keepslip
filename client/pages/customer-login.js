@@ -22,9 +22,12 @@ export default class CustomerLogin extends Component {
     console.log(KSa);
     let user;
     if (KSa) {
-      let userVerify = await fetch(`http://api.keepslip.com/auth/verify`, {
-        headers: { Authorization: `${KSa}` },
-      });
+      let userVerify = await fetch(
+        `http://${process.env.API_PATH}/auth/verify`,
+        {
+          headers: { Authorization: `${KSa}` },
+        }
+      );
       user = await userVerify.json();
       console.log(user);
       // return user;
@@ -52,7 +55,7 @@ export default class CustomerLogin extends Component {
 
   login = async (e) => {
     e.preventDefault();
-    let uri = `http://api.keepslip.com/auth/customer-login`;
+    let uri = `http://${process.env.API_PATH}/auth/customer-login`;
     let option = {
       method: "POST",
       body: JSON.stringify({

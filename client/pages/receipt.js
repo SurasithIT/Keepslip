@@ -91,14 +91,14 @@ Receipt.getInitialProps = async (ctx) => {
   const { KSa } = nextCookie(ctx);
   console.log(KSa);
   if (KSa) {
-    let userVerify = await fetch(`http://api.keepslip.com/auth/verify`, {
+    let userVerify = await fetch(`http://${process.env.API_PATH}/auth/verify`, {
       headers: { Authorization: `${KSa}` },
     });
     user = await userVerify.json();
     console.log("user handle err", user);
     // return user;
     let receipt_id = ctx.query.receipt_id;
-    const uri = `http://api.keepslip.com/receipt/receipt/${receipt_id}`;
+    const uri = `http://${process.env.API_PATH}/receipt/receipt/${receipt_id}`;
     const res = await fetch(uri);
     const data = await res.json();
     console.log(data);
