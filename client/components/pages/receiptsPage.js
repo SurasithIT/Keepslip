@@ -42,10 +42,10 @@ export default class ReceiptsPage extends Component {
 
     let uri = "";
     if (this.props.role === "store") {
-      uri = `http://${process.env.API_PATH}/receipt/receiptByStore/${this.props.user_id}`;
+      uri = `http://172.28.1.9:8080/receipt/receiptByStore/${this.props.user_id}`;
     }
     if (this.props.role === "customer") {
-      uri = `http://${process.env.API_PATH}/receipt/receiptByCustomer/${this.props.user_id}`;
+      uri = `http://172.28.1.9:8080/receipt/receiptByCustomer/${this.props.user_id}`;
     }
     const res = await fetch(uri, { signal: this.controller.signal });
     const datas = await res.json();
@@ -65,7 +65,7 @@ export default class ReceiptsPage extends Component {
         break;
       } else {
         const receiptFetch = await fetch(
-          `http://${process.env.API_PATH}/smartcontract/fullReceipt/${datas[i].KeepSlip_receipt_id}`,
+          `http://172.28.1.9:8080/smartcontract/fullReceipt/${datas[i].KeepSlip_receipt_id}`,
           {
             signal: this.controller.signal,
           }

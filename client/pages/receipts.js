@@ -13,12 +13,9 @@ export default class Receipts extends Component {
     let user;
 
     if (KSa) {
-      let userVerify = await fetch(
-        `http://${process.env.API_PATH}/auth/verify`,
-        {
-          headers: { Authorization: `${KSa}` },
-        }
-      );
+      let userVerify = await fetch(`http://172.28.1.9:8080/auth/verify`, {
+        headers: { Authorization: `${KSa}` },
+      });
       user = await userVerify.json();
       console.log(user);
       if (!user.error && user.user_id !== "") {
