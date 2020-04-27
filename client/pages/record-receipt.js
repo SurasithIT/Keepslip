@@ -35,7 +35,7 @@ RecordReceipt.getInitialProps = async (ctx) => {
   let user;
   if (KSa) {
     let userVerify = await fetch(
-      `http://localhost:3007/api/auth/store-verify`,
+      `http://35.247.154.183:3007/api/auth/store-verify`,
       {
         headers: { Authorization: `${KSa}` },
       }
@@ -43,7 +43,7 @@ RecordReceipt.getInitialProps = async (ctx) => {
     user = await userVerify.json();
     if (!user.error) {
       let storeFetch = await fetch(
-        `http://172.28.1.2:3002/api/store/store/${user.user_id}`
+        `http://35.247.154.183:3002/api/store/store/${user.user_id}`
       );
       let store = await storeFetch.json();
       console.log(store[0]);

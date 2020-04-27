@@ -42,10 +42,10 @@ export default class ReceiptsPage extends Component {
 
     let uri = "";
     if (this.props.role === "store") {
-      uri = `http://172.28.1.3:3003/api/receipt/receiptByStore/${this.props.user_id}`;
+      uri = `http://35.247.154.183:3003/api/receipt/receiptByStore/${this.props.user_id}`;
     }
     if (this.props.role === "customer") {
-      uri = `http://172.28.1.3:3003/api/receipt/receiptByCustomer/${this.props.user_id}`;
+      uri = `http://35.247.154.183:3003/api/receipt/receiptByCustomer/${this.props.user_id}`;
     }
     const res = await fetch(uri, { signal: this.controller.signal });
     const datas = await res.json();
@@ -65,7 +65,7 @@ export default class ReceiptsPage extends Component {
         break;
       } else {
         const receiptFetch = await fetch(
-          `http://172.28.1.4:3004/api/smartContract/fullReceipt/${datas[i].KeepSlip_receipt_id}`,
+          `http://35.247.154.183:3004/api/smartContract/fullReceipt/${datas[i].KeepSlip_receipt_id}`,
           {
             signal: this.controller.signal,
           }
@@ -129,6 +129,13 @@ export default class ReceiptsPage extends Component {
 
   initIndexedDB = () => {
     let db;
+    let indexedDB;
+    if (typeof window !== "undefined") {
+      indexedDB =
+        window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB;
+    } else {
+      return;
+    }
     let dbRequest = indexedDB.open("NotiDB", 1);
     dbRequest.onupgradeneeded = (e) => {
       db = e.target.result;
@@ -194,6 +201,13 @@ export default class ReceiptsPage extends Component {
 
   addReceiptNoti = (register, db, rec_id, item_num, remainTime) => {
     // Start a database transaction and get the notes object store
+    let indexedDB;
+    if (typeof window !== "undefined") {
+      indexedDB =
+        window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB;
+    } else {
+      return;
+    }
     let dbRequest = indexedDB.open("NotiDB", 1);
     dbRequest.onsuccess = (e) => {
       db = e.target.result;

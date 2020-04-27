@@ -1,10 +1,15 @@
 let register;
 
 registerFunc = async () => {
-  if ("serviceWorker" in navigator) {
-    window.addEventListener("load", function () {
-      navigator.serviceWorker.register("/service-worker.js");
-    });
+  if (
+    typeof window !== "undefined" &&
+    typeof window.navigator !== "undefined"
+  ) {
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("/service-worker.js");
+      });
+    }
   }
 };
 registerFunc();

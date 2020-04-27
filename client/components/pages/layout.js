@@ -18,10 +18,6 @@ export default class Layout extends Component {
           />
           <title>KeepSlip</title>
           <link rel="icon" href="/src/KeelSlip_Icon.png"></link>
-          <meta
-            http-equiv="Content-Security-Policy"
-            content="upgrade-insecure-requests"
-          />
         </Head>
         <div className="navbar">
           <Navbar />

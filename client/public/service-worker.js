@@ -61,7 +61,7 @@ self.addEventListener("notificationclick", (e) => {
     notification.close();
   } else {
     clients.openWindow(
-      `http://localhost:3000/receipt?receipt_id=${data.rec_id}`
+      `http://www.keepslip.com/receipt?receipt_id=${data.rec_id}`
     );
     notification.close();
   }

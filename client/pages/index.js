@@ -12,14 +12,23 @@ const Home = (props) => {
     console.log(props.user);
     if (props.user !== undefined) {
       if (props.user.error) {
-        navigator.serviceWorker
-          .register("/service-worker.js", {
-            scope: "/",
-          })
-          .then((register) => {
-            register.active.postMessage(JSON.stringify({ status: "clear" }));
-          });
-        deleteDB();
+        if (
+          typeof window !== "undefined" &&
+          typeof window.navigator !== "undefined"
+        ) {
+          if ("serviceWorker" in navigator) {
+            navigator.serviceWorker
+              .register("/service-worker.js", {
+                scope: "/",
+              })
+              .then((register) => {
+                register.active.postMessage(
+                  JSON.stringify({ status: "clear" })
+                );
+              });
+            deleteDB();
+          }
+        }
       }
     }
   }, [props.user]);
@@ -35,7 +44,13 @@ const Home = (props) => {
 
 const deleteDB = async () => {
   console.log("delete DB called");
-
+  let indexedDB;
+  if (typeof window !== "undefined") {
+    indexedDB =
+      window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB;
+  } else {
+    return;
+  }
   var DBDeleteRequest = indexedDB.deleteDatabase("NotiDB");
 
   // When i had the base open, the closure was blocked, so i left this here
@@ -59,7 +74,7 @@ Home.getInitialProps = async (ctx) => {
   console.log(KSa);
   let user;
   if (KSa) {
-    let userVerify = await fetch(`http://localhost:3007/api/auth/verify`, {
+    let userVerify = await fetch(`http://35.247.154.183:3007/api/auth/verify`, {
       headers: { Authorization: `${KSa}` },
     });
     user = await userVerify.json();
@@ -86,10 +101,9 @@ Home.getInitialProps = async (ctx) => {
               scope: "/",
             }
           );
+          register.active.postMessage(JSON.stringify({ status: "clear" }));
         }
-        register.active.postMessage(JSON.stringify({ status: "clear" }));
       }
-
       deleteDB();
     }
   }

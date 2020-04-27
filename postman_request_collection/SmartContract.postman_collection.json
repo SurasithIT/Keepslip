@@ -1,223 +1,181 @@
 {
-	"info": {
-		"_postman_id": "fe862792-1d65-4886-91a3-0a84a02c451d",
-		"name": "SmartContract",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-	},
-	"item": [
-		{
-			"name": "POST receipt",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"receiptId\":\"S1I29\",\n\t\"receiptDate\":\"2019:03:05T20:20:53\",\n\t\"items\":[\n\t\t{\n    \t\t\"productName\": \"Adidas Predator 20.1\",\n    \t\t\"price\": 8990.00,\n    \t\t\"amount\": 1,\n    \t\t\"warranty\": true,\n    \t\t\"warrantyTime\": 7\n\t\t},\n\t\t{\n    \t\t\"productName\": \"Real Madrid 2019/2020 kit\",\n    \t\t\"price\": 2990.00,\n    \t\t\"amount\": 1,\n    \t\t\"warranty\": true,\n    \t\t\"warrantyTime\": 7\n\t\t},\n\t\t{\n    \t\t\"productName\": \"Nike Strike Ball\",\n    \t\t\"price\": 990.00,\n    \t\t\"amount\": 1,\n    \t\t\"warranty\": false,\n    \t\t\"warrantyTime\": 0\n\t\t}\n\t]\n}"
-				},
-				"url": {
-					"raw": "http://localhost:3004/api/smartcontract/receipt/",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3004",
-					"path": [
-						"api",
-						"smartcontract",
-						"receipt",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GET receipt data by id",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"receiptId\":\"A123\",\n\t\"receiptDate\":\"2019:02:23T13:54:03\",\n\t\"items\":[\n\t\t{\n    \t\t\"productName\": \"Apple\",\n    \t\t\"price\": 50,\n    \t\t\"amount\": 10,\n    \t\t\"warranty\": \"false\",\n    \t\t\"warrantyTime\": 0\n\t\t},\n\t\t{\n    \t\t\"productName\": \"Mango\",\n    \t\t\"price\": 20,\n    \t\t\"amount\": 30,\n    \t\t\"warranty\": \"false\",\n    \t\t\"warrantyTime\": 0\n\t\t}\n\t]\n}"
-				},
-				"url": {
-					"raw": "http://localhost:3004/api/smartcontract/receipt/S1I20",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3004",
-					"path": [
-						"api",
-						"smartcontract",
-						"receipt",
-						"S1I20"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GET item by receipt id and item number",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"receiptId\":\"A123\",\n\t\"receiptDate\":\"2019:02:23T13:54:03\",\n\t\"items\":[\n\t\t{\n    \t\t\"productName\": \"Apple\",\n    \t\t\"price\": 50,\n    \t\t\"amount\": 10,\n    \t\t\"warranty\": \"false\",\n    \t\t\"warrantyTime\": 0\n\t\t},\n\t\t{\n    \t\t\"productName\": \"Mango\",\n    \t\t\"price\": 20,\n    \t\t\"amount\": 30,\n    \t\t\"warranty\": \"false\",\n    \t\t\"warrantyTime\": 0\n\t\t}\n\t]\n}"
-				},
-				"url": {
-					"raw": "http://localhost:3004/api/smartcontract/receiptItem/S1I442/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3004",
-					"path": [
-						"api",
-						"smartcontract",
-						"receiptItem",
-						"S1I442",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GET items by receipt id",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"receiptId\":\"A123\",\n\t\"receiptDate\":\"2019:02:23T13:54:03\",\n\t\"items\":[\n\t\t{\n    \t\t\"productName\": \"Apple\",\n    \t\t\"price\": 50,\n    \t\t\"amount\": 10,\n    \t\t\"warranty\": \"false\",\n    \t\t\"warrantyTime\": 0\n\t\t},\n\t\t{\n    \t\t\"productName\": \"Mango\",\n    \t\t\"price\": 20,\n    \t\t\"amount\": 30,\n    \t\t\"warranty\": \"false\",\n    \t\t\"warrantyTime\": 0\n\t\t}\n\t]\n}"
-				},
-				"url": {
-					"raw": "http://localhost:3004/api/smartcontract/receiptItems/S1I442",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3004",
-					"path": [
-						"api",
-						"smartcontract",
-						"receiptItems",
-						"S1I442"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GET all receipt id",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"receiptId\":\"A123\",\n\t\"receiptDate\":\"2019:02:23T13:54:03\",\n\t\"items\":[\n\t\t{\n    \t\t\"productName\": \"Apple\",\n    \t\t\"price\": 50,\n    \t\t\"amount\": 10,\n    \t\t\"warranty\": \"false\",\n    \t\t\"warrantyTime\": 0\n\t\t},\n\t\t{\n    \t\t\"productName\": \"Mango\",\n    \t\t\"price\": 20,\n    \t\t\"amount\": 30,\n    \t\t\"warranty\": \"false\",\n    \t\t\"warrantyTime\": 0\n\t\t}\n\t]\n}"
-				},
-				"url": {
-					"raw": "http://localhost:3004/api/smartcontract/receipts",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3004",
-					"path": [
-						"api",
-						"smartcontract",
-						"receipts"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GET full receipt by id",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"receiptId\":\"A123\",\n\t\"receiptDate\":\"2019:02:23T13:54:03\",\n\t\"items\":[\n\t\t{\n    \t\t\"productName\": \"Apple\",\n    \t\t\"price\": 50,\n    \t\t\"amount\": 10,\n    \t\t\"warranty\": \"false\",\n    \t\t\"warrantyTime\": 0\n\t\t},\n\t\t{\n    \t\t\"productName\": \"Mango\",\n    \t\t\"price\": 20,\n    \t\t\"amount\": 30,\n    \t\t\"warranty\": \"false\",\n    \t\t\"warrantyTime\": 0\n\t\t}\n\t]\n}"
-				},
-				"url": {
-					"raw": "http://localhost:3004/api/smartcontract/fullReceipt/S1I20",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3004",
-					"path": [
-						"api",
-						"smartcontract",
-						"fullReceipt",
-						"S1I20"
-					]
-				}
-			},
-			"response": []
-		}
-	],
-	"protocolProfileBehavior": {}
+  "info": {
+    "_postman_id": "fe862792-1d65-4886-91a3-0a84a02c451d",
+    "name": "SmartContract",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "POST receipt",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"receiptId\":\"S1I29\",\n\t\"receiptDate\":\"2019:03:05T20:20:53\",\n\t\"items\":[\n\t\t{\n    \t\t\"productName\": \"Adidas Predator 20.1\",\n    \t\t\"price\": 8990.00,\n    \t\t\"amount\": 1,\n    \t\t\"warranty\": true,\n    \t\t\"warrantyTime\": 7\n\t\t},\n\t\t{\n    \t\t\"productName\": \"Real Madrid 2019/2020 kit\",\n    \t\t\"price\": 2990.00,\n    \t\t\"amount\": 1,\n    \t\t\"warranty\": true,\n    \t\t\"warrantyTime\": 7\n\t\t},\n\t\t{\n    \t\t\"productName\": \"Nike Strike Ball\",\n    \t\t\"price\": 990.00,\n    \t\t\"amount\": 1,\n    \t\t\"warranty\": false,\n    \t\t\"warrantyTime\": 0\n\t\t}\n\t]\n}"
+        },
+        "url": {
+          "raw": "http://35.247.154.183:3004/api/smartcontract/receipt/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3004",
+          "path": ["api", "smartcontract", "receipt", ""]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET receipt data by id",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "type": "text",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"receiptId\":\"A123\",\n\t\"receiptDate\":\"2019:02:23T13:54:03\",\n\t\"items\":[\n\t\t{\n    \t\t\"productName\": \"Apple\",\n    \t\t\"price\": 50,\n    \t\t\"amount\": 10,\n    \t\t\"warranty\": \"false\",\n    \t\t\"warrantyTime\": 0\n\t\t},\n\t\t{\n    \t\t\"productName\": \"Mango\",\n    \t\t\"price\": 20,\n    \t\t\"amount\": 30,\n    \t\t\"warranty\": \"false\",\n    \t\t\"warrantyTime\": 0\n\t\t}\n\t]\n}"
+        },
+        "url": {
+          "raw": "http://35.247.154.183:3004/api/smartcontract/receipt/S1I20",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3004",
+          "path": ["api", "smartcontract", "receipt", "S1I20"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET item by receipt id and item number",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"receiptId\":\"A123\",\n\t\"receiptDate\":\"2019:02:23T13:54:03\",\n\t\"items\":[\n\t\t{\n    \t\t\"productName\": \"Apple\",\n    \t\t\"price\": 50,\n    \t\t\"amount\": 10,\n    \t\t\"warranty\": \"false\",\n    \t\t\"warrantyTime\": 0\n\t\t},\n\t\t{\n    \t\t\"productName\": \"Mango\",\n    \t\t\"price\": 20,\n    \t\t\"amount\": 30,\n    \t\t\"warranty\": \"false\",\n    \t\t\"warrantyTime\": 0\n\t\t}\n\t]\n}"
+        },
+        "url": {
+          "raw": "http://35.247.154.183:3004/api/smartcontract/receiptItem/S1I442/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3004",
+          "path": ["api", "smartcontract", "receiptItem", "S1I442", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET items by receipt id",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"receiptId\":\"A123\",\n\t\"receiptDate\":\"2019:02:23T13:54:03\",\n\t\"items\":[\n\t\t{\n    \t\t\"productName\": \"Apple\",\n    \t\t\"price\": 50,\n    \t\t\"amount\": 10,\n    \t\t\"warranty\": \"false\",\n    \t\t\"warrantyTime\": 0\n\t\t},\n\t\t{\n    \t\t\"productName\": \"Mango\",\n    \t\t\"price\": 20,\n    \t\t\"amount\": 30,\n    \t\t\"warranty\": \"false\",\n    \t\t\"warrantyTime\": 0\n\t\t}\n\t]\n}"
+        },
+        "url": {
+          "raw": "http://35.247.154.183:3004/api/smartcontract/receiptItems/S1I442",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3004",
+          "path": ["api", "smartcontract", "receiptItems", "S1I442"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET all receipt id",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"receiptId\":\"A123\",\n\t\"receiptDate\":\"2019:02:23T13:54:03\",\n\t\"items\":[\n\t\t{\n    \t\t\"productName\": \"Apple\",\n    \t\t\"price\": 50,\n    \t\t\"amount\": 10,\n    \t\t\"warranty\": \"false\",\n    \t\t\"warrantyTime\": 0\n\t\t},\n\t\t{\n    \t\t\"productName\": \"Mango\",\n    \t\t\"price\": 20,\n    \t\t\"amount\": 30,\n    \t\t\"warranty\": \"false\",\n    \t\t\"warrantyTime\": 0\n\t\t}\n\t]\n}"
+        },
+        "url": {
+          "raw": "http://35.247.154.183:3004/api/smartcontract/receipts",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3004",
+          "path": ["api", "smartcontract", "receipts"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET full receipt by id",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "type": "text",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"receiptId\":\"A123\",\n\t\"receiptDate\":\"2019:02:23T13:54:03\",\n\t\"items\":[\n\t\t{\n    \t\t\"productName\": \"Apple\",\n    \t\t\"price\": 50,\n    \t\t\"amount\": 10,\n    \t\t\"warranty\": \"false\",\n    \t\t\"warrantyTime\": 0\n\t\t},\n\t\t{\n    \t\t\"productName\": \"Mango\",\n    \t\t\"price\": 20,\n    \t\t\"amount\": 30,\n    \t\t\"warranty\": \"false\",\n    \t\t\"warrantyTime\": 0\n\t\t}\n\t]\n}"
+        },
+        "url": {
+          "raw": "http://35.247.154.183:3004/api/smartcontract/fullReceipt/S1I20",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3004",
+          "path": ["api", "smartcontract", "fullReceipt", "S1I20"]
+        }
+      },
+      "response": []
+    }
+  ],
+  "protocolProfileBehavior": {}
 }

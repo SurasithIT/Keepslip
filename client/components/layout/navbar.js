@@ -23,9 +23,12 @@ export default class Navbar extends Component {
     console.log(KSa);
     let user;
     if (KSa) {
-      let userVerify = await fetch(`http://localhost:3007/api/auth/verify`, {
-        headers: { Authorization: `${KSa}` },
-      });
+      let userVerify = await fetch(
+        `http://35.247.154.183:3007/api/auth/verify`,
+        {
+          headers: { Authorization: `${KSa}` },
+        }
+      );
       user = await userVerify.json();
       console.log(user);
       if (!user.error) {
@@ -68,12 +71,12 @@ export default class Navbar extends Component {
             scope: "/",
           }
         );
+        register.active.postMessage(JSON.stringify({ status: "clear" }));
       }
     }
 
-    register.active.postMessage(JSON.stringify({ status: "clear" }));
     cookie.remove("KSa");
-    let uri = `http://localhost:3007/api/auth/logout`;
+    let uri = `http://auth:3007/api/auth/logout`;
     let option = { method: "DELETE" };
     let sendData = await fetch(uri, option);
     let result = await sendData.json();
@@ -84,7 +87,13 @@ export default class Navbar extends Component {
 
   deleteDB = async () => {
     console.log("delete DB called");
-
+    let indexedDB;
+    if (typeof window !== "undefined") {
+      indexedDB =
+        window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB;
+    } else {
+      return;
+    }
     var DBDeleteRequest = indexedDB.deleteDatabase("NotiDB");
 
     // When i had the base open, the closure was blocked, so i left this here

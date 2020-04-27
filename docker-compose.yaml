@@ -171,11 +171,19 @@ services:
       context: ./client
     ports:
       - "3000:3000"
-    depends_on:
+    links:
       - keepslip-db
-    environment:
-      # - API_PATH=api.keepslip.com
-      - AUTH_SERVER=172.28.1.7:3007
+      - keepslip-nginx
+      - customer
+      - store
+      - receipt
+      - smart-contract
+      - the-revenue-department
+      - receipt-from-store
+      - auth
+    # environment:
+    #   # - API_PATH=api.keepslip.com
+    #   - AUTH_SERVER=172.28.1.7:3007
     volumes:
       - /usr/src/app/.next
       - /usr/src/app/node_modules
