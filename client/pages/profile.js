@@ -78,7 +78,7 @@ Profile.getInitialProps = async (ctx) => {
   const { KSa } = nextCookie(ctx);
   // console.log(KSa);
   if (KSa) {
-    let userVerify = await fetch(`http://35.240.161.75:3007/api/auth/verify`, {
+    let userVerify = await fetch(`http://localhost:3007/api/auth/verify`, {
       headers: { Authorization: `${KSa}` },
     });
     user = await userVerify.json();

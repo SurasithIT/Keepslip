@@ -35,7 +35,7 @@ RecordReceipt.getInitialProps = async (ctx) => {
   let user;
   if (KSa) {
     let userVerify = await fetch(
-      `http://35.240.161.75:3007/api/auth/store-verify`,
+      `http://localhost:3007/api/auth/store-verify`,
       {
         headers: { Authorization: `${KSa}` },
       }
