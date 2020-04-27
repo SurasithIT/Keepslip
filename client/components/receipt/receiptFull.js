@@ -24,7 +24,7 @@ class ReceiptFull extends Component {
   componentDidMount = async (props) => {
     this.controller = new window.AbortController();
     const receiptFetch = await fetch(
-      `http://35.247.154.183:3004/api/smartContract/fullReceipt/${this.props.receipt_id}`,
+      `http://${process.env.SMART_CONTRACT_SERVER}/fullReceipt/${this.props.receipt_id}`,
       { signal: this.controller.signal }
     );
     const receipt = await receiptFetch.json();

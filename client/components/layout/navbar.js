@@ -23,12 +23,9 @@ export default class Navbar extends Component {
     console.log(KSa);
     let user;
     if (KSa) {
-      let userVerify = await fetch(
-        `http://35.247.154.183:3007/api/auth/verify`,
-        {
-          headers: { Authorization: `${KSa}` },
-        }
-      );
+      let userVerify = await fetch(`http://${process.env.AUTH_SERVER}/verify`, {
+        headers: { Authorization: `${KSa}` },
+      });
       user = await userVerify.json();
       console.log(user);
       if (!user.error) {
@@ -76,7 +73,7 @@ export default class Navbar extends Component {
     }
 
     cookie.remove("KSa");
-    let uri = `http://auth:3007/api/auth/logout`;
+    let uri = `http://${process.env.AUTH_SERVER}/logout`;
     let option = { method: "DELETE" };
     let sendData = await fetch(uri, option);
     let result = await sendData.json();

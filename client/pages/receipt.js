@@ -91,14 +91,14 @@ Receipt.getInitialProps = async (ctx) => {
   const { KSa } = nextCookie(ctx);
   console.log(KSa);
   if (KSa) {
-    let userVerify = await fetch(`http://35.247.154.183:3007/api/auth/verify`, {
+    let userVerify = await fetch(`http://${process.env.AUTH_SERVER}/verify`, {
       headers: { Authorization: `${KSa}` },
     });
     user = await userVerify.json();
     console.log("user handle err", user);
     // return user;
     let receipt_id = ctx.query.receipt_id;
-    const uri = `http://35.247.154.183:3003/api/receipt/receipt/${receipt_id}`;
+    const uri = `http://${process.env.RECEIPT_SERVER}/receipt/${receipt_id}`;
     const res = await fetch(uri);
     const data = await res.json();
     console.log(data);

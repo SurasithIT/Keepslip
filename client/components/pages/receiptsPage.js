@@ -42,10 +42,10 @@ export default class ReceiptsPage extends Component {
 
     let uri = "";
     if (this.props.role === "store") {
-      uri = `http://35.247.154.183:3003/api/receipt/receiptByStore/${this.props.user_id}`;
+      uri = `http://${process.env.RECEIPT_SERVER}/receiptByStore/${this.props.user_id}`;
     }
     if (this.props.role === "customer") {
-      uri = `http://35.247.154.183:3003/api/receipt/receiptByCustomer/${this.props.user_id}`;
+      uri = `http://${process.env.RECEIPT_SERVER}/receiptByCustomer/${this.props.user_id}`;
     }
     const res = await fetch(uri, { signal: this.controller.signal });
     const datas = await res.json();
@@ -65,7 +65,7 @@ export default class ReceiptsPage extends Component {
         break;
       } else {
         const receiptFetch = await fetch(
-          `http://35.247.154.183:3004/api/smartContract/fullReceipt/${datas[i].KeepSlip_receipt_id}`,
+          `http://${process.env.SMART_CONTRACT_SERVER}/fullReceipt/${datas[i].KeepSlip_receipt_id}`,
           {
             signal: this.controller.signal,
           }
@@ -224,14 +224,21 @@ export default class ReceiptsPage extends Component {
       store.add(receipt);
       tx.oncomplete = function () {
         console.log("stored receipt!");
-        register.active.postMessage(
-          JSON.stringify({
-            status: "sent",
-            rec_id: rec_id,
-            item_id: item_num,
-            remain: remainTime,
-          })
-        );
+        if (
+          typeof window !== "undefined" &&
+          typeof window.navigator !== "undefined"
+        ) {
+          if ("serviceWorker" in navigator) {
+            register.active.postMessage(
+              JSON.stringify({
+                status: "sent",
+                rec_id: rec_id,
+                item_id: item_num,
+                remain: remainTime,
+              })
+            );
+          }
+        }
       };
       tx.onerror = function (event) {
         console.log("error storing receipt " + event.target.error);

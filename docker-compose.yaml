@@ -181,9 +181,18 @@ services:
       - the-revenue-department
       - receipt-from-store
       - auth
-    # environment:
-    #   # - API_PATH=api.keepslip.com
-    #   - AUTH_SERVER=172.28.1.7:3007
+    environment:
+      - NGINX_SERVER=keepslip-nginx
+      - CUSTOMER_SERVER=customer:3001/api/customer
+      - STORE_SERVER=store:3002/api/store
+      - RECEIPT_SERVER=receipt:3003/api/receipt
+      - SMART_CONTRACT_SERVER=smart-contract:3004/api/smartContract
+      - TRD_SERVER=the-revenue-department:3005/api/theRevenueDepartment
+      - RECEIPT_FORM_STORE_SERVER=receipt-from-store:3006/api/receiptFromStore
+      - AUTH_SERVER=auth:3007/api/auth
+      # www.keepslip.com/api/auth
+      # api.keepslip.com/auth
+      # ip of container
     volumes:
       - /usr/src/app/.next
       - /usr/src/app/node_modules

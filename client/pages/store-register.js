@@ -30,12 +30,9 @@ export default class StoreRegister extends Component {
     console.log(KSa);
     let user;
     if (KSa) {
-      let userVerify = await fetch(
-        `http://35.247.154.183:3007/api/auth/verify`,
-        {
-          headers: { Authorization: `${KSa}` },
-        }
-      );
+      let userVerify = await fetch(`http://${process.env.AUTH_SERVER}/verify`, {
+        headers: { Authorization: `${KSa}` },
+      });
       user = await userVerify.json();
       console.log(user);
       // return user;
@@ -66,7 +63,7 @@ export default class StoreRegister extends Component {
 
   getStoreData = async (e) => {
     e.preventDefault();
-    let uri = `http://35.247.154.183:3005/api/theRevenueDepartment/storeFromTRD`;
+    let uri = `http://${process.env.TRD_SERVER}/storeFromTRD`;
     let option = {
       method: "POST",
       body: JSON.stringify({
@@ -114,7 +111,7 @@ export default class StoreRegister extends Component {
   register = async (e) => {
     e.preventDefault();
     if (this.state.password === this.state.rePassword) {
-      let uri = `http://35.247.154.183:3002/api/store/store/`;
+      let uri = `http://${process.env.STORE_SERVER}/store/`;
       let option = {
         method: "POST",
         body: JSON.stringify({

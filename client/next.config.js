@@ -1,0 +1,36 @@
+module.exports = {
+  env: {
+    // NGINX_SERVER: process.env.NGINX_SERVER,
+    // CUSTOMER_SERVER: process.env.CUSTOMER_SERVER,
+    // STORE_SERVER: process.env.STORE_SERVER,
+    // RECEIPT_SERVER: process.env.RECEIPT_SERVER,
+    // SMART_CONTRACT_SERVER: process.env.SMART_CONTRACT_SERVER,
+    // TRD_SERVER: process.env.TRD_SERVER,
+    // RECEIPT_FORM_STORE_SERVER: process.env.RECEIPT_FORM_STORE_SERVER,
+    // AUTH_SERVER: process.env.AUTH_SERVER,
+
+    // CUSTOMER_SERVER: `localhost:3001/api/customer`,
+    // STORE_SERVER: `localhost:3002/api/store`,
+    // RECEIPT_SERVER: `localhost:3003/api/receipt`,
+    // SMART_CONTRACT_SERVER: `localhost:3004/api/smartContract`,
+    // TRD_SERVER: `localhost:3005/api/theRevenueDepartment`,
+    // RECEIPT_FORM_STORE_SERVER: `localhost:3006/api/receiptFromStore`,
+    // AUTH_SERVER: `localhost:3007/api/auth`,
+
+    // CUSTOMER_SERVER: `172.28.1.1:3001/api/customer`,
+    // STORE_SERVER: `172.28.1.2:3002/api/store`,
+    // RECEIPT_SERVER: `172.28.1.3:3003/api/receipt`,
+    // SMART_CONTRACT_SERVER: `172.28.1.4:3004/api/smartContract`,
+    // TRD_SERVER: `172.28.1.5:3005/api/theRevenueDepartment`,
+    // RECEIPT_FORM_STORE_SERVER: `172.28.1.6:3006/api/receiptFromStore`,
+    // AUTH_SERVER: `172.28.1.7:3007/api/auth`,
+
+    CUSTOMER_SERVER: `192.168.1.79:3001/api/customer`,
+    STORE_SERVER: `192.168.1.79:3002/api/store`,
+    RECEIPT_SERVER: `192.168.1.79:3003/api/receipt`,
+    SMART_CONTRACT_SERVER: `192.168.1.79:3004/api/smartContract`,
+    TRD_SERVER: `192.168.1.79:3005/api/trd`,
+    RECEIPT_FORM_STORE_SERVER: `192.168.1.79:3006/api/receiptFromStore`,
+    AUTH_SERVER: `192.168.1.79:3007/api/auth`,
+  },
+};

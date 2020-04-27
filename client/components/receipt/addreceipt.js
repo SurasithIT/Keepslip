@@ -59,7 +59,7 @@ export default class AddReceipt extends Component {
     let receiptIdValid = receiptIdField.checkValidity();
     if (receiptIdValid) {
       let receiptFetch = await fetch(
-        `http://35.247.154.183:3006/api/receiptFromStore/fullReceipt/${this.props.id}/${this.state.receiptId}`
+        `http://${process.env.RECEIPT_FORM_STORE_SERVER}/fullReceipt/${this.props.id}/${this.state.receiptId}`
       );
       let receiptResult = await receiptFetch.json();
 
@@ -152,7 +152,7 @@ export default class AddReceipt extends Component {
     let phoneNumberValid = phoneNumberField.checkValidity();
     if (phoneNumberValid) {
       let customerFetch = await fetch(
-        `http://35.247.154.183:3001/api/customer/customerByPhone/${this.state.phoneNumber}`
+        `http://${process.env.CUSTOMER_SERVER}/customerByPhone/${this.state.phoneNumber}`
       );
       let customerResult = await customerFetch.json();
       if (!customerResult.error) {
@@ -254,7 +254,7 @@ export default class AddReceipt extends Component {
   };
 
   addInvoiceToDB = async () => {
-    let DBurl = `http://35.247.154.183:3003/api/receipt/receipt`;
+    let DBurl = `http://${process.env.RECEIPT_SERVER}/receipt`;
     let option = {
       method: "POST",
       body: JSON.stringify({
@@ -312,7 +312,7 @@ export default class AddReceipt extends Component {
       items: items,
     };
     // console.log(data);
-    let SMurl = `http://35.247.154.183:3004/api/smartContract/receipt/`;
+    let SMurl = `http://${process.env.SMART_CONTRACT_SERVER}/receipt/`;
     let option = {
       method: "POST",
       body: JSON.stringify(data),

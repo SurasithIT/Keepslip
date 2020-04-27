@@ -71,10 +71,11 @@ const deleteDB = async () => {
 Home.getInitialProps = async (ctx) => {
   // const KSa = cookie.get("KSa");
   const { KSa } = nextCookie(ctx);
+  console.log("process.env.AUTH_SERVER", process.env.AUTH_SERVER);
   console.log(KSa);
   let user;
   if (KSa) {
-    let userVerify = await fetch(`http://35.247.154.183:3007/api/auth/verify`, {
+    let userVerify = await fetch(`http://${process.env.AUTH_SERVER}/verify`, {
       headers: { Authorization: `${KSa}` },
     });
     user = await userVerify.json();
@@ -104,6 +105,7 @@ Home.getInitialProps = async (ctx) => {
           register.active.postMessage(JSON.stringify({ status: "clear" }));
         }
       }
+
       deleteDB();
     }
   }

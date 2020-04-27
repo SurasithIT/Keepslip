@@ -78,7 +78,7 @@ Profile.getInitialProps = async (ctx) => {
   const { KSa } = nextCookie(ctx);
   // console.log(KSa);
   if (KSa) {
-    let userVerify = await fetch(`http://35.247.154.183:3007/api/auth/verify`, {
+    let userVerify = await fetch(`http://${process.env.AUTH_SERVER}/verify`, {
       headers: { Authorization: `${KSa}` },
     });
     user = await userVerify.json();
@@ -86,7 +86,7 @@ Profile.getInitialProps = async (ctx) => {
     if (!user.error) {
       if (user.role == "customer") {
         let customerFetch = await fetch(
-          `http://35.247.154.183:3001/api/customer/customerById/${user.user_id}`,
+          `http://${process.env.CUSTOMER_SERVER}/customerById/${user.user_id}`,
           {
             headers: { Authorization: `${KSa}` },
           }
@@ -97,7 +97,7 @@ Profile.getInitialProps = async (ctx) => {
       }
       if (user.role == "store") {
         let storeFetch = await fetch(
-          `http://35.247.154.183:3002/api/store/store/${user.user_id}`,
+          `http://${process.env.STORE_SERVER}/store/${user.user_id}`,
           {
             headers: { Authorization: `${KSa}` },
           }

@@ -6,7 +6,7 @@ async function auth() {
   console.log(KSa);
   let user;
   if (KSa) {
-    let userVerify = await fetch(`http://35.247.154.183:3007/api/auth/verify`, {
+    let userVerify = await fetch(`http://${process.env.AUTH_SERVER}/verify`, {
       headers: { Authorization: `${KSa}` },
     });
     user = await userVerify.json();
