@@ -4,7 +4,7 @@ services:
     image: nginx:1.13.12-alpine
     container_name: keepslip-nginx
     ports:
-      - "8080:80"
+      - "80:80"
     volumes:
       - ./nginx/:/etc/nginx/conf.d/
     networks:
@@ -175,7 +175,7 @@ services:
       - keepslip-db
     environment:
       # - API_PATH=api.keepslip.com
-      - API_PATH=172.28.1.9:8080
+      - AUTH_SERVER=172.28.1.7:3007
     volumes:
       - /usr/src/app/.next
       - /usr/src/app/node_modules

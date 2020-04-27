@@ -42,10 +42,10 @@ export default class ReceiptsPage extends Component {
 
     let uri = "";
     if (this.props.role === "store") {
-      uri = `http://api.keepslip.com/receipt/receiptByStore/${this.props.user_id}`;
+      uri = `http://172.28.1.3:3003/api/receipt/receiptByStore/${this.props.user_id}`;
     }
     if (this.props.role === "customer") {
-      uri = `http://api.keepslip.com/receipt/receiptByCustomer/${this.props.user_id}`;
+      uri = `http://172.28.1.3:3003/api/receipt/receiptByCustomer/${this.props.user_id}`;
     }
     const res = await fetch(uri, { signal: this.controller.signal });
     const datas = await res.json();
@@ -65,7 +65,7 @@ export default class ReceiptsPage extends Component {
         break;
       } else {
         const receiptFetch = await fetch(
-          `http://api.keepslip.com/smartcontract/fullReceipt/${datas[i].KeepSlip_receipt_id}`,
+          `http://172.28.1.4:3004/api/smartContract/fullReceipt/${datas[i].KeepSlip_receipt_id}`,
           {
             signal: this.controller.signal,
           }
