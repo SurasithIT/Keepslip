@@ -23,7 +23,7 @@ export default class ReceiptsPage extends Component {
 
   componentDidMount = async () => {
     this.controller = new window.AbortController();
-    console.log("isMounted", this.isMounted);
+    // console.log("isMounted", this.isMounted);
     if (
       typeof window !== "undefined" &&
       typeof window.navigator !== "undefined"
@@ -42,14 +42,14 @@ export default class ReceiptsPage extends Component {
 
     let uri = "";
     if (this.props.role === "store") {
-      uri = `http://${process.env.RECEIPT_SERVER}/receiptByStore/${this.props.user_id}`;
+      uri = `${process.env.RECEIPT_SERVER}/receiptByStore/${this.props.user_id}`;
     }
     if (this.props.role === "customer") {
-      uri = `http://${process.env.RECEIPT_SERVER}/receiptByCustomer/${this.props.user_id}`;
+      uri = `${process.env.RECEIPT_SERVER}/receiptByCustomer/${this.props.user_id}`;
     }
     const res = await fetch(uri, { signal: this.controller.signal });
     const datas = await res.json();
-    // console.log(datas);
+    // // console.log(datas);
 
     if (datas.error) {
       this.setState({
@@ -65,7 +65,7 @@ export default class ReceiptsPage extends Component {
         break;
       } else {
         const receiptFetch = await fetch(
-          `http://${process.env.SMART_CONTRACT_SERVER}/fullReceipt/${datas[i].KeepSlip_receipt_id}`,
+          `${process.env.SMART_CONTRACT_SERVER}/fullReceipt/${datas[i].KeepSlip_receipt_id}`,
           {
             signal: this.controller.signal,
           }
@@ -73,8 +73,8 @@ export default class ReceiptsPage extends Component {
         const receipt = await receiptFetch.json();
 
         datas[i].items = receipt.items;
-        //   console.log(datas[i].items);
-        console.log(receipt);
+        //   // console.log(datas[i].items);
+        // console.log(receipt);
 
         // get total price
         let total = 0;
@@ -96,7 +96,7 @@ export default class ReceiptsPage extends Component {
                 receipt.items[i].warrantyTime >= 7 &&
                 remaining >= 6 * one_day
               ) {
-                // console.log("Add!!!", receipt.receiptId, i, remaining);
+                // // console.log("Add!!!", receipt.receiptId, i, remaining);
                 this.addReceiptNoti(
                   register,
                   this.state.db,
@@ -159,7 +159,7 @@ export default class ReceiptsPage extends Component {
       req.onsuccess = (e) => {
         const cursor = e.target.result;
         if (cursor) {
-          console.log("NotiDB", cursor.key, cursor.value);
+          // console.log("NotiDB", cursor.key, cursor.value);
           // alert(cursor);
           cursor.continue();
         }
@@ -178,8 +178,8 @@ export default class ReceiptsPage extends Component {
     let remaining = expire - timeNow;
     // let remaining = createTime + one_day * warrantyTime - timeNow;
 
-    // console.log("remaining", remaining);
-    // console.log("remaining day", remaining / one_day);
+    // // console.log("remaining", remaining);
+    // // console.log("remaining day", remaining / one_day);
     return remaining;
   };
 
@@ -194,8 +194,8 @@ export default class ReceiptsPage extends Component {
     let expire = createTime + one_day * warrantyTime;
     // let remaining = createTime + one_day * warrantyTime - timeNow;
 
-    // console.log("expire", expire);
-    // console.log("expire day", new Date(expire));
+    // // console.log("expire", expire);
+    // // console.log("expire day", new Date(expire));
     return expire;
   };
 
@@ -223,7 +223,7 @@ export default class ReceiptsPage extends Component {
       };
       store.add(receipt);
       tx.oncomplete = function () {
-        console.log("stored receipt!");
+        // console.log("stored receipt!");
         if (
           typeof window !== "undefined" &&
           typeof window.navigator !== "undefined"
@@ -241,7 +241,7 @@ export default class ReceiptsPage extends Component {
         }
       };
       tx.onerror = function (event) {
-        console.log("error storing receipt " + event.target.error);
+        // console.log("error storing receipt " + event.target.error);
       };
       db.close();
     };
@@ -251,9 +251,9 @@ export default class ReceiptsPage extends Component {
     // let abortController = new window.AbortController();
     // abortController.abort();
     this.controller.abort();
-    console.log("componentWillUnmount");
+    // console.log("componentWillUnmount");
     this.isMounted = false;
-    console.log("isMounte", this.isMounted);
+    // console.log("isMounte", this.isMounted);
   };
   // controller = new window.AbortController();
 
@@ -282,8 +282,15 @@ export default class ReceiptsPage extends Component {
           </a>
         </div>
         {this.state.datas && this.state.datas.error && (
-          <div className="data-error">
-            <span>Error : {this.state.datas.message}</span>
+          <div className="nodata">
+            <span>
+              {/* Error : {this.state.datas.message} <br /> */}
+              Welcome!!!
+              <br />
+              Let's keep your receipt into
+              <br />
+              BLOCKCHAIN.
+            </span>
           </div>
         )}
         <div
@@ -411,7 +418,7 @@ export default class ReceiptsPage extends Component {
             justify-items: stretch;
             padding: 20px 20px;
           }
-          .data-error {
+          .nodata {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -420,10 +427,14 @@ export default class ReceiptsPage extends Component {
             margin-top: 40px;
             font-size: 17px;
             padding: 10px;
-            border: 2px solid #ff5757;
-            border-radius: 3px;
-            background: #ff9f9f;
+            // border: 2px solid #ff5757;
+            // border-radius: 3px;
+            // background: #ff9f9f;
             width: fit-content;
+            font-size: 25px;
+            // border: 2px solid #5fc553;
+            // border-radius: 10px;
+            color: #5fc553;
           }
           .search-box {
             width: 100%;

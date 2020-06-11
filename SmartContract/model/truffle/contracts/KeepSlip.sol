@@ -1,5 +1,7 @@
 pragma solidity >=0.4.22 <0.6.0;
 pragma experimental ABIEncoderV2;
+
+
 contract KeepSlip {
     struct Receipt {
         string receiptId;
@@ -47,7 +49,14 @@ contract KeepSlip {
     function getItem(string memory _receiptId, uint256 _itemNumber)
         public
         view
-        returns (string memory, string memory, uint256, uint256, bool, uint256)
+        returns (
+            string memory,
+            string memory,
+            uint256,
+            uint256,
+            bool,
+            uint256
+        )
     {
         return (
             items[_receiptId][_itemNumber].receiptId,
@@ -74,11 +83,3 @@ contract KeepSlip {
 // test input
 // ["a123", "A021684"],[["a123", "Espresso", 4500, 1, false, 0],["a123", "IPhoneXI", 4500000, 1, true, 365]]
 // ["AP245", "A021684"],[["AP245", "MacBook Pro", 4599000, 1, true, 365],["AP245", "IPhoneXI", 4500000, 1, true, 365]]
-
-// มันจะมีฟังก์ชันเรียกดูค่าที่ solidity มันทำให้เองเช่น items, receipts ลองใช้ดู output มันจะต่างกัน เปรียบเทียบกับเมธอดที่เราสร้างแล้วเลือกใช้ให้เหมาะสม
-
-// ไปปรับ
-// Receipt ควรจะเก็บ ID ลูกค้า กับร้านค้ามั้ย
-// มันบันทึกหมายเลขใบเสร็จซ้ำได้ เพราะฉะนั้นต้องดึง listReceipt มาเช็คก่อนว่าหมายเลขที่จะบันทึกมันมีซ้ำมั้ย กันพลาด ดักเคสไว้
-// หรือไม่ก็เช็คใน DB ก่อนว่าบันทึกได้มั้ย ถ้า id มันซ้ำมันบันทึกไม่ได้อยู๋แล้ว ก็ดักเคส ลำดับขั้นตอนเอาว่าควรจะดักเออเร่ออะไรยังไงก่อนหลัง
-// (ควรทำที่ DB ก่อนเพราะมันแก้ไขได้ แล้วค่อยทำที่ SM ถ้า SM มี error ยังไปแก้ข้อมู,ใน DB ได้)

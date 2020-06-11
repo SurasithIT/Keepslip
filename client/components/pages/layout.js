@@ -18,6 +18,7 @@ export default class Layout extends Component {
           />
           <title>KeepSlip</title>
           <link rel="icon" href="/src/KeelSlip_Icon.png"></link>
+          <link rel="manifest" href="/manifest.json"></link>
         </Head>
         <div className="navbar">
           <Navbar />

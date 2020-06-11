@@ -19,14 +19,14 @@ export default class StoreLogin extends Component {
 
   static async getInitialProps(ctx) {
     const { KSa } = nextCookie(ctx);
-    console.log(KSa);
+    // console.log(KSa);
     let user;
     if (KSa) {
-      let userVerify = await fetch(`http://${process.env.AUTH_SERVER}/verify`, {
+      let userVerify = await fetch(`${process.env.AUTH_SERVER}/verify`, {
         headers: { Authorization: `${KSa}` },
       });
       user = await userVerify.json();
-      console.log(user);
+      // console.log(user);
       // return user;
       if (!user.error && user.user_id !== "") {
         if (ctx.req) {
@@ -46,7 +46,7 @@ export default class StoreLogin extends Component {
 
   login = async (e) => {
     e.preventDefault();
-    let uri = `http://${process.env.AUTH_SERVER}/store-login`;
+    let uri = `${process.env.AUTH_SERVER}/store-login`;
     let option = {
       method: "POST",
       body: JSON.stringify({
@@ -59,9 +59,9 @@ export default class StoreLogin extends Component {
     };
     let sendData = await fetch(uri, option);
     let result = await sendData.json();
-    console.log(result);
+    // console.log(result);
     if (!result.error) {
-      //   console.log("Success");
+      //   // console.log("Success");
       cookie.set("KSa", result.token);
       this.setState({
         registerError: "",
@@ -73,9 +73,9 @@ export default class StoreLogin extends Component {
       //   //   query: { store_id: result.insertId }
       //   // });
     } else {
-      //   console.log("Username or Email or Phone number has been registered!");
-      //   console.log("errno :", result.errno);
-      //   console.log("sqlMessage :", result.sqlMessage);
+      //   // console.log("Username or Email or Phone number has been registered!");
+      //   // console.log("errno :", result.errno);
+      //   // console.log("sqlMessage :", result.sqlMessage);
       this.setState({
         loginError: result.message,
       });

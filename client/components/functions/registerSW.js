@@ -13,6 +13,6 @@ registerFunc = async () => {
   }
 };
 registerFunc();
-console.log(register);
+// console.log(register);
 
 module.exports = register;

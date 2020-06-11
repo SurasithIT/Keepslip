@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const CustomerProfile = (props) => {
-  console.log(props.user);
+  // console.log(props.user);
   let { Email, Firstname, Lastname, PhoneNumber } = props.user;
   return (
     <div>

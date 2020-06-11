@@ -65,7 +65,7 @@ DROP TABLE IF EXISTS `KeepSlipDB`.`Receipt` ;
 CREATE TABLE IF NOT EXISTS `KeepSlipDB`.`Receipt` (
   `Customer_id` INT NOT NULL,
   `Store_id` INT NOT NULL,
-  `Receipt_id` VARCHAR(45) NOT NULL,
+  `Receipt_id` VARCHAR(255) NOT NULL,
   `KeepSlip_receipt_id` VARCHAR(255) NOT NULL,
   `Receipt_date` DATETIME NOT NULL,
   PRIMARY KEY (`KeepSlip_receipt_id`, `Customer_id`, `Store_id`),

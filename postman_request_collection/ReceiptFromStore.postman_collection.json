@@ -1,131 +1,183 @@
 {
-  "info": {
-    "_postman_id": "9a934f15-59a4-4593-8edb-db0f7eaa7df3",
-    "name": "ReceiptFromStore",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-  },
-  "item": [
-    {
-      "name": "GET all receipts",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://35.247.154.183:3006/api/receiptFromStore/receipts/",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "3006",
-          "path": ["api", "receiptFromStore", "receipts", ""]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "GET all items",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://35.247.154.183:3006/api/receiptFromStore/items/",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "3006",
-          "path": ["api", "receiptFromStore", "items", ""]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "GET receipt by receipt id and store id",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://35.247.154.183:3006/api/receiptFromStore/receipt/1/20",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "3006",
-          "path": ["api", "receiptFromStore", "receipt", "1", "20"]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "GET item by receipt id and store id",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://35.247.154.183:3006/api/receiptFromStore/item/1/20",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "3006",
-          "path": ["api", "receiptFromStore", "item", "1", "20"]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "GET full receipt by receipt id and store id",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://35.247.154.183:3006/api/receiptFromStore/fullReceipt/1/0",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "3006",
-          "path": ["api", "receiptFromStore", "fullReceipt", "1", "0"]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "POST receipt",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Content-Type",
-            "name": "Content-Type",
-            "type": "text",
-            "value": "application/json"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n\t\"receiptId\":\"20\",\n\t\"receiptDate\":\"2019:02:23T13:54:03\",\n\t\"storeId\": \"1\",\n\t\"items\":[\n\t\t{\n    \t\t\"productName\": \"Apple\",\n    \t\t\"price\": 50,\n    \t\t\"amount\": 10,\n    \t\t\"warranty\": true,\n    \t\t\"warrantyTime\": 30\n\t\t},\n\t\t{\n    \t\t\"productName\": \"Banana\",\n    \t\t\"price\": 20,\n    \t\t\"amount\": 30,\n    \t\t\"warranty\": false,\n    \t\t\"warrantyTime\": 0\n\t\t}\n\t]\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://35.247.154.183:3006/api/receiptFromStore/receipt",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "3006",
-          "path": ["api", "receiptFromStore", "receipt"]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "DELETE receipt by id",
-      "request": {
-        "method": "DELETE",
-        "header": [],
-        "url": {
-          "raw": "http://35.247.154.183:3006/api/receiptFromStore/receipt/20/1",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "3006",
-          "path": ["api", "receiptFromStore", "receipt", "20", "1"]
-        }
-      },
-      "response": []
-    }
-  ],
-  "protocolProfileBehavior": {}
+	"info": {
+		"_postman_id": "9a934f15-59a4-4593-8edb-db0f7eaa7df3",
+		"name": "ReceiptFromStore",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET all receipts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3004/api/receiptFromStore/receipts/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3004",
+					"path": [
+						"api",
+						"receiptFromStore",
+						"receipts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET all items",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3004/api/receiptFromStore/items/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3004",
+					"path": [
+						"api",
+						"receiptFromStore",
+						"items",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET receipt by receipt id and store id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3004/api/receiptFromStore/receipt/1/0001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3004",
+					"path": [
+						"api",
+						"receiptFromStore",
+						"receipt",
+						"1",
+						"0001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET item by receipt id and store id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3004/api/receiptFromStore/item/1/20",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3004",
+					"path": [
+						"api",
+						"receiptFromStore",
+						"item",
+						"1",
+						"20"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET full receipt by receipt id and store id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3004/api/receiptFromStore/fullReceipt/1/0001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3004",
+					"path": [
+						"api",
+						"receiptFromStore",
+						"fullReceipt",
+						"1",
+						"0001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST receipt",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"receiptId\":\"COM7DD-001\",\n\t\"receiptDate\":\"2020-04-28T18:09:41\",\n\t\"storeId\": 14,\n\t\"items\":[\n\t\t{\n    \t\t\"productName\": \"Product A\",\n    \t\t\"price\": 6590,\n    \t\t\"amount\": 1,\n    \t\t\"warranty\": true,\n    \t\t\"warrantyTime\": 30\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3004/api/receiptFromStore/receipt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3004",
+					"path": [
+						"api",
+						"receiptFromStore",
+						"receipt"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE receipt by id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3004/api/receiptFromStore/receipt/0008/19",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3004",
+					"path": [
+						"api",
+						"receiptFromStore",
+						"receipt",
+						"0008",
+						"19"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
 }

@@ -48,7 +48,7 @@ export default class AddReceipt extends Component {
     let createTime = "";
     createTime = new Date(receiptDate);
     createTime = createTime.getTime();
-    let remainingDay = Math.round(
+    let remainingDay = Math.ceil(
       (createTime + one_day * warrantyTime - timeNow) / one_day
     );
     return remainingDay;
@@ -59,7 +59,7 @@ export default class AddReceipt extends Component {
     let receiptIdValid = receiptIdField.checkValidity();
     if (receiptIdValid) {
       let receiptFetch = await fetch(
-        `http://${process.env.RECEIPT_FORM_STORE_SERVER}/fullReceipt/${this.props.id}/${this.state.receiptId}`
+        `${process.env.RECEIPT_FORM_STORE_SERVER}/fullReceipt/${this.props.id}/${this.state.receiptId}`
       );
       let receiptResult = await receiptFetch.json();
 
@@ -67,7 +67,7 @@ export default class AddReceipt extends Component {
         this.setState({
           receiptInputErr: { error: false },
           receipt: {
-            id: receiptResult.id,
+            id: receiptResult.Receipt_id,
             ReceiptDate: receiptResult.ReceiptDate.slice(0, 19).replace(
               "T",
               " "
@@ -92,13 +92,13 @@ export default class AddReceipt extends Component {
             newState.receipt.items[i].remainingDay = remainingDay;
             this.setState(newState);
           }
-          // console.log(this.state.receipt.items);
+          // // console.log(this.state.receipt.items);
         }
 
         this.getTotalPrice();
         this.checkAddReceiptBtn();
       } else {
-        console.log(receiptResult);
+        // console.log(receiptResult);
         this.setState({
           receipt: {
             id: "",
@@ -112,7 +112,7 @@ export default class AddReceipt extends Component {
         });
       }
     } else {
-      // console.log("Receipt ID is invalid!");
+      // // console.log("Receipt ID is invalid!");
       this.setState({
         receipt: {
           id: "",
@@ -152,7 +152,7 @@ export default class AddReceipt extends Component {
     let phoneNumberValid = phoneNumberField.checkValidity();
     if (phoneNumberValid) {
       let customerFetch = await fetch(
-        `http://${process.env.CUSTOMER_SERVER}/customerByPhone/${this.state.phoneNumber}`
+        `${process.env.CUSTOMER_SERVER}/customerByPhone/${this.state.phoneNumber}`
       );
       let customerResult = await customerFetch.json();
       if (!customerResult.error) {
@@ -254,7 +254,7 @@ export default class AddReceipt extends Component {
   };
 
   addInvoiceToDB = async () => {
-    let DBurl = `http://${process.env.RECEIPT_SERVER}/receipt`;
+    let DBurl = `${process.env.RECEIPT_SERVER}/receipt`;
     let option = {
       method: "POST",
       body: JSON.stringify({
@@ -272,7 +272,7 @@ export default class AddReceipt extends Component {
     };
     let sendData = await fetch(DBurl, option);
     let result = await sendData.json();
-    // console.log(result);
+    // // console.log(result);
     if (!result.errno) {
       this.setState({
         resultRecordingDB: {
@@ -311,8 +311,8 @@ export default class AddReceipt extends Component {
       ),
       items: items,
     };
-    // console.log(data);
-    let SMurl = `http://${process.env.SMART_CONTRACT_SERVER}/receipt/`;
+    // // console.log(data);
+    let SMurl = `${process.env.SMART_CONTRACT_SERVER}/receipt/`;
     let option = {
       method: "POST",
       body: JSON.stringify(data),
@@ -322,7 +322,7 @@ export default class AddReceipt extends Component {
     };
     let sendData = await fetch(SMurl, option);
     let result = await sendData.json();
-    // console.log(result);
+    // // console.log(result);
     if (!result.error) {
       this.setState({
         resultRecordingSM: {

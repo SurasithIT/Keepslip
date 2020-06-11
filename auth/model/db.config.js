@@ -5,7 +5,8 @@ var KeepSlipDB = mysql.createConnection({
   port: process.env.MYSQL_PORT || "3307",
   user: process.env.MYSQL_USER || "root",
   password: process.env.MYSQL_PASSWORD || "1234",
-  database: process.env.MYSQL_DATABASE || "KeepSlipDB"
+  database: process.env.MYSQL_DATABASE || "KeepSlipDB",
+  // socketPath: `/cloudsql/${process.env.CLOUD_SQL_CONNECTION_NAME}`,
   // insecureAuth: "true"
 });
 

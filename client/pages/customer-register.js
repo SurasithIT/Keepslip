@@ -27,14 +27,14 @@ export default class CustomerRegister extends Component {
 
   static async getInitialProps(ctx) {
     const { KSa } = nextCookie(ctx);
-    console.log(KSa);
+    // console.log(KSa);
     let user;
     if (KSa) {
-      let userVerify = await fetch(`http://${process.env.AUTH_SERVER}/verify`, {
+      let userVerify = await fetch(`${process.env.AUTH_SERVER}/verify`, {
         headers: { Authorization: `${KSa}` },
       });
       user = await userVerify.json();
-      console.log(user);
+      // console.log(user);
       // return user;
       if (!user.error && user.user_id !== "") {
         if (ctx.req) {
@@ -51,7 +51,7 @@ export default class CustomerRegister extends Component {
   register = async (e) => {
     e.preventDefault();
     if (this.state.password === this.state.rePassword) {
-      let uri = `http://${process.env.CUSTOMER_SERVER}/customer/`;
+      let uri = `${process.env.CUSTOMER_SERVER}/customer/`;
       let option = {
         method: "POST",
         body: JSON.stringify({
@@ -68,9 +68,9 @@ export default class CustomerRegister extends Component {
       };
       let sendData = await fetch(uri, option);
       let result = await sendData.json();
-      console.log(result);
+      // console.log(result);
       if (result.insertId) {
-        console.log("Success");
+        // console.log("Success");
         this.setState({
           registerError: "",
           success: true,
@@ -79,16 +79,16 @@ export default class CustomerRegister extends Component {
           Router.push("/customer-login");
         }, 2000);
       } else {
-        console.log("Username or Email or Phone number has been registered!");
-        console.log("errno :", result.errno);
-        console.log("sqlMessage :", result.sqlMessage);
+        // console.log("Username or Email or Phone number has been registered!");
+        // console.log("errno :", result.errno);
+        // console.log("sqlMessage :", result.sqlMessage);
         this.setState({
           registerError:
             "Username or Email or Phone number has been registered!",
         });
       }
     } else {
-      console.log("Password not match!");
+      // console.log("Password not match!");
       this.setState({
         registerError: "Password not match!",
       });
@@ -120,7 +120,9 @@ export default class CustomerRegister extends Component {
             Error : {this.state.registerError}
           </div>
           <form method="post" className="RegisterForm" onSubmit={this.register}>
-            <p>Username</p>
+            <p>
+              Username <span style={{ color: "#ff5757" }}>*</span>
+            </p>
             <input
               type="text"
               placeholder="username"
@@ -129,7 +131,9 @@ export default class CustomerRegister extends Component {
               onChange={this.handleChange}
               required
             ></input>
-            <p>Email</p>
+            <p>
+              Email <span style={{ color: "#ff5757" }}>*</span>
+            </p>
             <input
               type="email"
               placeholder="email"
@@ -138,16 +142,22 @@ export default class CustomerRegister extends Component {
               onChange={this.handleChange}
               required
             ></input>
-            <p>Password</p>
+            <p>
+              Password <span style={{ color: "#ff5757" }}>*</span> (at least 8
+              characters)
+            </p>
             <input
               type="password"
               placeholder="password"
               name="password"
               value={this.state.password}
               onChange={this.handleChange}
+              minLength="8"
               required
             ></input>
-            <p>Re enter Password</p>
+            <p>
+              Re enter Password <span style={{ color: "#ff5757" }}>*</span>
+            </p>
             <input
               type="password"
               placeholder="password"
@@ -156,7 +166,9 @@ export default class CustomerRegister extends Component {
               onChange={this.handleChange}
               required
             ></input>
-            <p>Firstname</p>
+            <p>
+              Firstname <span style={{ color: "#ff5757" }}>*</span>
+            </p>
             <input
               type="text"
               placeholder="Firstname"
@@ -165,7 +177,9 @@ export default class CustomerRegister extends Component {
               onChange={this.handleChange}
               required
             ></input>
-            <p>Lastname</p>
+            <p>
+              Lastname <span style={{ color: "#ff5757" }}>*</span>
+            </p>
             <input
               type="text"
               placeholder="Lastname"
@@ -174,7 +188,9 @@ export default class CustomerRegister extends Component {
               onChange={this.handleChange}
               required
             ></input>
-            <p>Phone number</p>
+            <p>
+              Phone number <span style={{ color: "#ff5757" }}>*</span>
+            </p>
             <input
               type="tel"
               name="phoneNumber"

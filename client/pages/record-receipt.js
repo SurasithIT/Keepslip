@@ -7,7 +7,7 @@ import Router from "next/router";
 import nextCookie from "next-cookies";
 import Head from "next/head";
 const RecordReceipt = (props) => {
-  console.log(props);
+  // console.log(props);
   return (
     <Layout>
       <Head>
@@ -31,22 +31,19 @@ const RecordReceipt = (props) => {
 
 RecordReceipt.getInitialProps = async (ctx) => {
   const { KSa } = nextCookie(ctx);
-  console.log(KSa);
+  // console.log(KSa);
   let user;
   if (KSa) {
-    let userVerify = await fetch(
-      `http://${process.env.AUTH_SERVER}/store-verify`,
-      {
-        headers: { Authorization: `${KSa}` },
-      }
-    );
+    let userVerify = await fetch(`${process.env.AUTH_SERVER}/store-verify`, {
+      headers: { Authorization: `${KSa}` },
+    });
     user = await userVerify.json();
     if (!user.error) {
       let storeFetch = await fetch(
-        `http://${process.env.STORE_SERVER}/store/${user.user_id}`
+        `${process.env.STORE_SERVER}/store/${user.user_id}`
       );
       let store = await storeFetch.json();
-      console.log(store[0]);
+      // console.log(store[0]);
       return {
         id: user.user_id,
         NID: store[0].NID,

@@ -12,21 +12,21 @@ import fetch from "isomorphic-unfetch";
 Home.getInitialProps = async (ctx) => {
   const { KSa } = nextCookie("KSa");
   //   const KSa = cookie.get("KSa");
-  console.log(KSa);
+  // console.log(KSa);
   let user;
   if (KSa) {
-    let userVerify = await fetch(`http://${process.env.AUTH_SERVER}/verify`, {
+    let userVerify = await fetch(`${process.env.AUTH_SERVER}/verify`, {
       headers: { Authorization: `${KSa}` },
     });
     user = await userVerify.json();
-    console.log(user);
+    // console.log(user);
     // return user;
   } else {
     if (ctx.req) {
-      ctx.res.writeHead(302, { Location: "/Unauthorization" });
+      ctx.res.writeHead(302, { Location: "/unauthorization" });
       ctx.res.end();
     } else {
-      Router.push("/Unauthorization");
+      Router.push("/unauthorization");
     }
   }
   return { user: user };

@@ -27,14 +27,14 @@ export default class StoreRegister extends Component {
 
   static async getInitialProps(ctx) {
     const { KSa } = nextCookie(ctx);
-    console.log(KSa);
+    // console.log(KSa);
     let user;
     if (KSa) {
-      let userVerify = await fetch(`http://${process.env.AUTH_SERVER}/verify`, {
+      let userVerify = await fetch(`${process.env.AUTH_SERVER}/verify`, {
         headers: { Authorization: `${KSa}` },
       });
       user = await userVerify.json();
-      console.log(user);
+      // console.log(user);
       // return user;
       if (!user.error && user.user_id !== "") {
         if (ctx.req) {
@@ -63,7 +63,7 @@ export default class StoreRegister extends Component {
 
   getStoreData = async (e) => {
     e.preventDefault();
-    let uri = `http://${process.env.TRD_SERVER}/storeFromTRD`;
+    let uri = `${process.env.TRD_SERVER}/storeFromTRD`;
     let option = {
       method: "POST",
       body: JSON.stringify({
@@ -81,13 +81,14 @@ export default class StoreRegister extends Component {
     };
     let sendData = await fetch(uri, option);
     let result = await sendData.json();
-    console.log(result);
+    // console.log(result);
     if (result.NID) {
       this.setState({
         branchName: result.BranchName,
         businessName: result.BusinessName,
         address: result.Address,
         postCode: result.PostCode,
+        registerError: "",
       });
     } else {
       this.setState({
@@ -95,6 +96,7 @@ export default class StoreRegister extends Component {
         businessName: "",
         address: "",
         postCode: "",
+        registerError: "No VAT data found!",
       });
     }
     if (this.state.businessName === "") {
@@ -111,7 +113,7 @@ export default class StoreRegister extends Component {
   register = async (e) => {
     e.preventDefault();
     if (this.state.password === this.state.rePassword) {
-      let uri = `http://${process.env.STORE_SERVER}/store/`;
+      let uri = `${process.env.STORE_SERVER}/store/`;
       let option = {
         method: "POST",
         body: JSON.stringify({
@@ -131,9 +133,9 @@ export default class StoreRegister extends Component {
       };
       let sendData = await fetch(uri, option);
       let result = await sendData.json();
-      console.log(result);
+      // console.log(result);
       if (result.insertId) {
-        console.log("Success");
+        // console.log("Success");
         this.setState({
           registerError: "",
           success: true,
@@ -142,15 +144,15 @@ export default class StoreRegister extends Component {
           Router.push("/store-login");
         }, 2000);
       } else {
-        console.log("Username has been registered!");
-        console.log("errno :", result.errno);
-        console.log("sqlMessage :", result.sqlMessage);
+        // console.log("Username has been registered!");
+        // console.log("errno :", result.errno);
+        // console.log("sqlMessage :", result.sqlMessage);
         this.setState({
           registerError: "Username has been registered!",
         });
       }
     } else {
-      console.log("Password not match!");
+      // console.log("Password not match!");
       this.setState({
         registerError: "Password not match!",
       });
@@ -182,7 +184,9 @@ export default class StoreRegister extends Component {
             Error : {this.state.registerError}
           </div>
           <form method="post" className="RegisterForm" onSubmit={this.register}>
-            <p>Username</p>
+            <p>
+              Username <span style={{ color: "#ff5757" }}>*</span>
+            </p>
             <input
               type="text"
               placeholder="username"
@@ -191,16 +195,22 @@ export default class StoreRegister extends Component {
               onChange={this.handleChange}
               required
             ></input>
-            <p>Password</p>
+            <p>
+              Password <span style={{ color: "#ff5757" }}>*</span> (at least 8
+              characters)
+            </p>
             <input
               type="password"
               placeholder="password"
               name="password"
               value={this.state.password}
               onChange={this.handleChange}
+              minLength="8"
               required
             ></input>
-            <p>Re enter Password</p>
+            <p>
+              Re enter Password <span style={{ color: "#ff5757" }}>*</span>
+            </p>
             <input
               type="password"
               placeholder="password"
@@ -209,16 +219,24 @@ export default class StoreRegister extends Component {
               onChange={this.handleChange}
               required
             ></input>
-            <p>NID</p>
+            <p>
+              NID (13 digit) <span style={{ color: "#ff5757" }}>*</span> find
+              data <a href="https://www.rd.go.th/publish/313.0.html">here</a>
+            </p>
             <input
               type="text"
-              placeholder="NID"
+              placeholder="NID (13 digit)"
               name="nid"
               value={this.state.nid}
               onChange={this.handleChange}
+              minLength="13"
+              maxLength="13"
               required
             ></input>
-            <p>Branch ID</p>
+            <p>
+              Branch ID <span style={{ color: "#ff5757" }}>*</span> (Head office
+              ID is 0)
+            </p>
             <input
               type="number"
               placeholder="Branch ID"
@@ -235,7 +253,9 @@ export default class StoreRegister extends Component {
               Get Store Data
             </button>
             <div className="store-data">
-              <p>BusinessName</p>
+              <p>
+                BusinessName <span style={{ color: "#ff5757" }}>*</span>{" "}
+              </p>
               <input
                 type="text"
                 placeholder="Business Name"
@@ -245,7 +265,9 @@ export default class StoreRegister extends Component {
                 disabled
                 required
               ></input>
-              <p>BranchName</p>
+              <p>
+                BranchName <span style={{ color: "#ff5757" }}>*</span>{" "}
+              </p>
               <input
                 type="text"
                 placeholder="Branch name"
@@ -255,7 +277,9 @@ export default class StoreRegister extends Component {
                 disabled
                 required
               ></input>
-              <p>Address</p>
+              <p>
+                Address <span style={{ color: "#ff5757" }}>*</span>{" "}
+              </p>
               <textarea
                 cols="40"
                 rows="5"
@@ -266,7 +290,9 @@ export default class StoreRegister extends Component {
                 disabled
                 required
               ></textarea>
-              <p>PostCode</p>
+              <p>
+                PostCode <span style={{ color: "#ff5757" }}>*</span>{" "}
+              </p>
               <input
                 type="text"
                 placeholder="PostCode"

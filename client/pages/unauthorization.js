@@ -3,7 +3,7 @@ import Layout from "../components/pages/layout";
 import Router from "next/router";
 import Head from "next/head";
 
-export default class Unauthorization extends Component {
+export default class unauthorization extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,7 +22,7 @@ export default class Unauthorization extends Component {
   };
 
   componentWillUnmount = () => {
-    console.log("componentWillUnmount");
+    // console.log("componentWillUnmount");
     clearTimeout(this.redirect);
     clearInterval(this.count);
   };
@@ -31,11 +31,11 @@ export default class Unauthorization extends Component {
     return (
       <Layout>
         <Head>
-          <title>KeepSlip : Unauthorization</title>
+          <title>KeepSlip : unauthorization</title>
         </Head>
         <div className="container">
           <div className="content">
-            <b>Unauthorization!</b>
+            <b>unauthorization!</b>
             <br />
             Please login!
             <br />

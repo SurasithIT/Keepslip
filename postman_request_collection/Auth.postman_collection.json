@@ -1,0 +1,192 @@
+{
+	"info": {
+		"_postman_id": "bf1a9b6d-63ba-4549-aa87-6bd6977adaf6",
+		"name": "Auth",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST customer login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Access-Control-Allow-Origin",
+						"type": "text",
+						"value": "*",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"Username\",\n    \"password\": \"12345678\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3005/api/auth/customer-login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3005",
+					"path": [
+						"api",
+						"auth",
+						"customer-login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST store login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t \"username\": \"A-HOST-Chon\",\n    \"password\": \"1234\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3005/api/auth/store-login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3005",
+					"path": [
+						"api",
+						"auth",
+						"store-login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE logout",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3005/api/auth/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3005",
+					"path": [
+						"api",
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET user verify",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxOCwidXNlcm5hbWUiOiJTdXJhc2l0aCIsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTU4NjI2MTM1MCwiZXhwIjoxNTg2MjYzMTUwfQ.gc1gteNMk5R5fx9mM6An34HsE7uynmLnKCn_DgZXuNE"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3005/api/auth/verify",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3005",
+					"path": [
+						"api",
+						"auth",
+						"verify"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET store verify",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxOCwicm9sZSI6ImN1c3RvbWVyIiwiaWF0IjoxNTg2MDgwNTE4LCJleHAiOjE1ODYwODIzMTh9.epWTEL-WRqlDo5RRiL1s_XCBaFPK4yZkrQFEdmruqpM"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3005/api/auth/store-verify",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3005",
+					"path": [
+						"api",
+						"auth",
+						"store-verify"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET customer verify",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxOCwicm9sZSI6ImN1c3RvbWVyIiwiaWF0IjoxNTg2MDgwNTE4LCJleHAiOjE1ODYwODIzMTh9.epWTEL-WRqlDo5RRiL1s_XCBaFPK4yZkrQFEdmruqpM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3005/api/auth/customer-verify",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3005",
+					"path": [
+						"api",
+						"auth",
+						"customer-verify"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

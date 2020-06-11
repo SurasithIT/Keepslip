@@ -9,7 +9,7 @@ import React, { useState, useEffect } from "react";
 
 const Home = (props) => {
   useEffect(() => {
-    console.log(props.user);
+    // console.log(props.user);
     if (props.user !== undefined) {
       if (props.user.error) {
         if (
@@ -26,8 +26,8 @@ const Home = (props) => {
                   JSON.stringify({ status: "clear" })
                 );
               });
-            deleteDB();
           }
+          deleteDB();
         }
       }
     }
@@ -43,7 +43,7 @@ const Home = (props) => {
 };
 
 const deleteDB = async () => {
-  console.log("delete DB called");
+  // console.log("delete DB called");
   let indexedDB;
   if (typeof window !== "undefined") {
     indexedDB =
@@ -55,31 +55,30 @@ const deleteDB = async () => {
 
   // When i had the base open, the closure was blocked, so i left this here
   DBDeleteRequest.onblocked = function (event) {
-    console.log("Blocked");
+    // console.log("Blocked");
   };
 
   DBDeleteRequest.onerror = function (event) {
-    console.log("Error deleting database.");
-    console.log(event);
+    // console.log("Error deleting database.");
+    // console.log(event);
   };
 
   DBDeleteRequest.onsuccess = function (event) {
-    console.log("Database deleted successfully");
+    // console.log("Database deleted successfully");
   };
 };
 
 Home.getInitialProps = async (ctx) => {
   // const KSa = cookie.get("KSa");
   const { KSa } = nextCookie(ctx);
-  console.log("process.env.AUTH_SERVER", process.env.AUTH_SERVER);
-  console.log(KSa);
+  // // console.log(KSa);
   let user;
   if (KSa) {
-    let userVerify = await fetch(`http://${process.env.AUTH_SERVER}/verify`, {
+    let userVerify = await fetch(`${process.env.AUTH_SERVER}/verify`, {
       headers: { Authorization: `${KSa}` },
     });
     user = await userVerify.json();
-    console.log(user);
+    // console.log(user);
     // return user;
 
     if (!user.error && user.user_id !== "") {
@@ -90,7 +89,7 @@ Home.getInitialProps = async (ctx) => {
         Router.push("/receipts");
       }
     } else {
-      console.log("No user");
+      // console.log("No user");
       if (
         typeof window !== "undefined" &&
         typeof window.navigator !== "undefined"

@@ -2,10 +2,10 @@ const ReceiptDB = require("./db.config");
 
 class Receipt {
   constructor(receipt) {
+    this.KeepSlip_receipt_id = receipt.KeepSlip_receipt_id;
     this.receiptId = receipt.receiptId;
     this.receiptDate = receipt.receiptDate;
     this.storeId = receipt.storeId;
-    // this.items = receipt.items;
   }
 }
 
@@ -26,12 +26,11 @@ class Item {
     this.amount = item.amount;
     this.warranty = item.warranty;
     this.warrantyTime = item.warrantyTime; // day
-    this.receipt_id = receiptId;
-    this.receipt_store_id = store_id;
   }
 }
 Receipt.createReceipt = (newReceipt, newItems, result) => {
-  let queryReceipt = `INSERT INTO Receipt VALUES ("${newReceipt.receiptId}", "${newReceipt.receiptDate}", ${newReceipt.storeId});`;
+  let KeepSlip_receipt_id = `S${newReceipt.storeId}I${newReceipt.receiptId}`;
+  let queryReceipt = `INSERT INTO Receipt VALUES ("${KeepSlip_receipt_id}", "${newReceipt.receiptId}", "${newReceipt.receiptDate}", ${newReceipt.storeId});`;
   ReceiptDB.query(queryReceipt, (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -48,7 +47,7 @@ Receipt.createReceipt = (newReceipt, newItems, result) => {
         } else {
           warranty = 0;
         }
-        let queryItem = `INSERT INTO Item VALUES ("${newItems.items[i].itemNumber}", "${newItems.items[i].productName}", ${newItems.items[i].price}, ${newItems.items[i].amount}, ${warranty}, ${newItems.items[i].warrantyTime}, "${newItems.items[i].receipt_id}", ${newItems.items[i].receipt_store_id});`;
+        let queryItem = `INSERT INTO Item VALUES ("${newItems.items[i].itemNumber}", "${newItems.items[i].productName}", ${newItems.items[i].price}, ${newItems.items[i].amount}, ${warranty}, ${newItems.items[i].warrantyTime}, "${KeepSlip_receipt_id}");`;
         ReceiptDB.query(queryItem, (err, res) => {
           if (err) {
             console.log("error: ", err);
@@ -64,7 +63,7 @@ Receipt.createReceipt = (newReceipt, newItems, result) => {
   });
 };
 
-Receipt.getAllReceipts = result => {
+Receipt.getAllReceipts = (result) => {
   query = "SELECT * FROM Receipt";
   ReceiptDB.query(query, (err, res) => {
     if (err) {
@@ -77,7 +76,7 @@ Receipt.getAllReceipts = result => {
   });
 };
 
-Receipt.getAllItems = result => {
+Receipt.getAllItems = (result) => {
   query = "SELECT * FROM Item";
   ReceiptDB.query(query, (err, res) => {
     if (err) {
@@ -91,7 +90,7 @@ Receipt.getAllItems = result => {
 };
 
 Receipt.getReceiptByID = (receiptId, storeId, result) => {
-  let query = `SELECT * FROM Receipt WHERE id="${receiptId}" AND Store_id=${storeId}`;
+  let query = `SELECT * FROM Receipt WHERE KeepSlip_receipt_id="S${storeId}I${receiptId}";`;
   ReceiptDB.query(query, (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -102,7 +101,7 @@ Receipt.getReceiptByID = (receiptId, storeId, result) => {
         let err = {
           error: true,
           status: 400,
-          message: `No data found of receipt id ${receiptId} and store id ${storeId}`
+          message: `No data found of receipt id ${receiptId} and store id ${storeId}`,
         };
         result(err, null);
       } else {
@@ -113,7 +112,7 @@ Receipt.getReceiptByID = (receiptId, storeId, result) => {
 };
 
 Receipt.getItemByID = (receiptId, storeId, result) => {
-  let query = `SELECT * FROM Item WHERE Receipt_id="${receiptId}" AND Receipt_Store_id=${storeId}`;
+  let query = `SELECT * FROM Item WHERE Receipt_KeepSlip_receipt_id="S${storeId}I${receiptId}";`;
   ReceiptDB.query(query, (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -124,7 +123,7 @@ Receipt.getItemByID = (receiptId, storeId, result) => {
         let err = {
           error: true,
           status: 400,
-          message: `No data found of receipt id ${receiptId} and store id ${storeId}`
+          message: `No data found of receipt id ${receiptId} and store id ${storeId}`,
         };
         result(err, null);
       } else {
@@ -135,9 +134,15 @@ Receipt.getItemByID = (receiptId, storeId, result) => {
 };
 
 Receipt.getFullReceiptByID = (receiptId, storeId, result) => {
-  let queryReceipt = `SELECT * FROM Receipt WHERE id = "${receiptId}" AND Store_id = ${storeId}`;
-  let queryItem = `SELECT * FROM Item WHERE Receipt_id="${receiptId}" AND Receipt_Store_id=${storeId};`;
-  let data = { id: "", ReceiptDate: "", Store_id: "", items: [] };
+  let queryReceipt = `SELECT * FROM Receipt WHERE KeepSlip_receipt_id="S${storeId}I${receiptId}";`;
+  let queryItem = `SELECT * FROM Item WHERE Receipt_KeepSlip_receipt_id="S${storeId}I${receiptId}";`;
+  let data = {
+    KeepSlip_receipt_id: "",
+    Receipt_id: "",
+    ReceiptDate: "",
+    Store_id: "",
+    items: [],
+  };
   ReceiptDB.query(queryReceipt, (err, res) => {
     console.log(res);
     if (err) {
@@ -149,12 +154,13 @@ Receipt.getFullReceiptByID = (receiptId, storeId, result) => {
       let err = {
         error: true,
         status: 400,
-        message: `No data found of receipt id ${receiptId} and store id ${storeId}`
+        message: `No data found of receipt id ${receiptId} and store id ${storeId}`,
       };
       result(err, null);
     } else {
       // result(null, res);
-      data.id = res[0].id;
+      data.KeepSlip_receipt_id = res[0].KeepSlip_receipt_id;
+      data.Receipt_id = res[0].Receipt_id;
       data.ReceiptDate = res[0].ReceiptDate;
       data.Store_id = res[0].Store_id;
       console.log(data);
@@ -224,8 +230,8 @@ Receipt.getFullReceiptByID = (receiptId, storeId, result) => {
 // };
 
 Receipt.removeItem = (receiptId, storeId, result) => {
-  let queryReceipt = `DELETE FROM Receipt WHERE id = ${receiptId} AND Store_id = ${storeId}`;
-  let queryItem = `DELETE FROM Item WHERE Receipt_id=${receiptId} AND Receipt_Store_id=${storeId};`;
+  let queryReceipt = `DELETE FROM Receipt WHERE KeepSlip_receipt_id="S${storeId}I${receiptId}";`;
+  let queryItem = `DELETE FROM Item WHERE Receipt_KeepSlip_receipt_id="S${storeId}I${receiptId}";`;
   ReceiptDB.query(queryItem, (err, res) => {
     if (err) {
       console.log("error: ", err);

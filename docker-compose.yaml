@@ -9,7 +9,6 @@ services:
       - ./nginx/:/etc/nginx/conf.d/
     networks:
       keepslip_network:
-        ipv4_address: 172.28.1.9
 
   keepslip-db:
     container_name: keepslip-db
@@ -26,11 +25,11 @@ services:
       keepslip_network:
         ipv4_address: 172.28.1.10
 
-  customer:
-    container_name: customer
+  service:
+    container_name: service
     restart: always
     build:
-      context: ./Customer
+      context: ./Service
     ports:
       - "3001:3001"
     depends_on:
@@ -43,54 +42,10 @@ services:
       - MYSQL_PORT=3306
     volumes:
       - /usr/src/app/node_modules
-      - ./Customer/:/usr/src/app/
+      - ./Service/:/usr/src/app/
     networks:
       keepslip_network:
         ipv4_address: 172.28.1.1
-
-  store:
-    container_name: store
-    restart: always
-    build:
-      context: ./Store
-    ports:
-      - "3002:3002"
-    depends_on:
-      - keepslip-db
-    environment:
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=1234
-      - MYSQL_DATABASE=KeepSlipDB
-      - MYSQL_HOST=172.28.1.10
-      - MYSQL_PORT=3306
-    volumes:
-      - /usr/src/app/node_modules
-      - ./Store/:/usr/src/app/
-    networks:
-      keepslip_network:
-        ipv4_address: 172.28.1.2
-
-  receipt:
-    container_name: receipt
-    restart: always
-    build:
-      context: ./Receipt
-    ports:
-      - "3003:3003"
-    depends_on:
-      - keepslip-db
-    environment:
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=1234
-      - MYSQL_DATABASE=KeepSlipDB
-      - MYSQL_HOST=172.28.1.10
-      - MYSQL_PORT=3306
-    volumes:
-      - /usr/src/app/node_modules
-      - ./Receipt/:/usr/src/app/
-    networks:
-      keepslip_network:
-        ipv4_address: 172.28.1.3
 
   smart-contract:
     container_name: smart-contract
@@ -98,13 +53,13 @@ services:
     build:
       context: ./SmartContract
     ports:
-      - "3004:3004"
+      - "3002:3002"
     volumes:
       - /usr/src/app/node_modules
       - ./SmartContract/:/usr/src/app/
     networks:
       keepslip_network:
-        ipv4_address: 172.28.1.4
+        ipv4_address: 172.28.1.2
 
   the-revenue-department:
     container_name: the-revenue-department
@@ -112,13 +67,13 @@ services:
     build:
       context: ./TheRevenueDepartment
     ports:
-      - "3005:3005"
+      - "3003:3003"
     volumes:
       - /usr/src/app/node_modules
       - ./TheRevenueDepartment/:/usr/src/app/
     networks:
       keepslip_network:
-        ipv4_address: 172.28.1.5
+        ipv4_address: 172.28.1.3
 
   receipt-from-store:
     container_name: receipt-from-store
@@ -126,7 +81,7 @@ services:
     build:
       context: ./ReceiptFromStore
     ports:
-      - "3006:3006"
+      - "3004:3004"
     depends_on:
       - keepslip-db
     environment:
@@ -140,7 +95,7 @@ services:
       - ./ReceiptFromStore/:/usr/src/app/
     networks:
       keepslip_network:
-        ipv4_address: 172.28.1.6
+        ipv4_address: 172.28.1.4
 
   auth:
     container_name: auth
@@ -148,7 +103,7 @@ services:
     build:
       context: ./auth
     ports:
-      - "3007:3007"
+      - "3005:3005"
     depends_on:
       - keepslip-db
     environment:
@@ -162,7 +117,7 @@ services:
       - ./auth/:/usr/src/app/
     networks:
       keepslip_network:
-        ipv4_address: 172.28.1.7
+        ipv4_address: 172.28.1.5
 
   client:
     container_name: client
@@ -174,32 +129,18 @@ services:
     links:
       - keepslip-db
       - keepslip-nginx
-      - customer
-      - store
-      - receipt
+      - service
       - smart-contract
       - the-revenue-department
       - receipt-from-store
       - auth
-    environment:
-      - NGINX_SERVER=keepslip-nginx
-      - CUSTOMER_SERVER=customer:3001/api/customer
-      - STORE_SERVER=store:3002/api/store
-      - RECEIPT_SERVER=receipt:3003/api/receipt
-      - SMART_CONTRACT_SERVER=smart-contract:3004/api/smartContract
-      - TRD_SERVER=the-revenue-department:3005/api/theRevenueDepartment
-      - RECEIPT_FORM_STORE_SERVER=receipt-from-store:3006/api/receiptFromStore
-      - AUTH_SERVER=auth:3007/api/auth
-      # www.keepslip.com/api/auth
-      # api.keepslip.com/auth
-      # ip of container
     volumes:
       - /usr/src/app/.next
       - /usr/src/app/node_modules
       - ./client/:/usr/src/app/
     networks:
       keepslip_network:
-        ipv4_address: 172.28.1.8
+        ipv4_address: 172.28.1.6
 
 networks:
   keepslip_network:
@@ -207,21 +148,3 @@ networks:
       driver: default
       config:
         - subnet: 172.28.0.0/16
-# database (share volume in KeepSlip-Backend/data)
-# docker run --rm --name keepslip-db -p 3306:3306 -v C:/Users/Surasith/Desktop/KeepSlip-Backend/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=1234 -d mysql
-# docker exec -it keepslip-db bash
-# mysql --user=root --password=1234
-# ALTER USER root IDENTIFIED WITH mysql_native_password BY '1234';
-
-# dockerfile customer
-# docker inspect keepslip-db <--- to get ip of keepslip-db use to setting MYSQL_HOST
-# or // docker inspect --format="{{json .NetworkSettings.Networks}}"  keepslip-db <--- to get ip of keepslip-db use to setting MYSQL_HOST
-# docker run --rm -p 3001:3001 -e MYSQL_USER=root -e MYSQL_PASSWORD=1234 -e MYSQL_DATABASE=KeepSlipDB -e MYSQL_HOST=172.17.0.2 -e MYSQL_PORT=3306 --link keepslip-db --name=customer customer
-
-# https://www.youtube.com/watch?v=tIbMSqTEpfY
-# https://hub.docker.com/_/mysql
-# https://docs.docker.com/compose/compose-file/#command
-
-# NextJS with Docker and NGINX
-# https://steveholgado.com/nginx-for-nextjs/
-# https://www.google.com/search?q=next+js+nginx+docker&oq=next+js+nginx+docker&aqs=chrome..69i57.13128j1j7&sourceid=chrome&ie=UTF-8

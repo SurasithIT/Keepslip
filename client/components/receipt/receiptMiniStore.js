@@ -69,15 +69,14 @@ class ReceiptMiniStore extends Component {
               font-size: 23px;
             }
             button {
-              width: 80px;
-              height: 30px;
+              width: fit-content;
               border-radius: 20px;
               border: 1px solid #ddd;
               cursor: pointer;
               margin: 1em;
               background: #1564bf;
               color: white;
-              // padding: 10px;
+              padding: 5px 10px;
             }
 
             button:hover {

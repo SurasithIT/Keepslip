@@ -1,7 +1,7 @@
 const ethers = require("ethers");
 const contractJSON = require("./truffle/build/contracts/KeepSlip.json");
 
-// const provider = new ethers.providers.JsonRpcProvider("http://35.247.154.183:8545");
+// const provider = new ethers.providers.JsonRpcProvider("http://localhost:8545");
 let provider = ethers.getDefaultProvider(
   "kovan",
   "26c25ad8a6574ff784188acd2fb8727f"
@@ -25,5 +25,5 @@ module.exports = {
   wallet,
   address,
   contract,
-  contractWithSigner,
+  contractWithSigner
 };

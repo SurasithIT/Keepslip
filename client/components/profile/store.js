@@ -2,6 +2,7 @@ import React from "react";
 
 const StoreProfile = (props) => {
   let {
+    id,
     Address,
     Branch_id,
     BusinessName,
@@ -11,6 +12,9 @@ const StoreProfile = (props) => {
   } = props.user;
   return (
     <div>
+      <b>Store_id : </b>
+      {id}
+      <br />
       <b>NID : </b>
       {NID}
       <br />

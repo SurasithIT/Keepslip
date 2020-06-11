@@ -6,6 +6,7 @@ import Router from "next/router";
 import nextCookie from "next-cookies";
 import fetch from "isomorphic-unfetch";
 import Head from "next/head";
+
 export default class CustomerLogin extends Component {
   constructor(props) {
     super(props);
@@ -19,14 +20,14 @@ export default class CustomerLogin extends Component {
 
   static async getInitialProps(ctx) {
     const { KSa } = nextCookie(ctx);
-    console.log(KSa);
+    // console.log(KSa);
     let user;
     if (KSa) {
-      let userVerify = await fetch(`http://${process.env.AUTH_SERVER}/verify`, {
+      let userVerify = await fetch(`${process.env.AUTH_SERVER}/verify`, {
         headers: { Authorization: `${KSa}` },
       });
       user = await userVerify.json();
-      console.log(user);
+      // console.log(user);
       // return user;
       if (!user.error && user.user_id !== "") {
         if (ctx.req) {
@@ -46,13 +47,13 @@ export default class CustomerLogin extends Component {
     } else {
       this.setState({ [e.target.name]: e.target.value });
     }
-    // console.log(e.target.name);
-    // console.log(e.target.value);
+    // // console.log(e.target.name);
+    // // console.log(e.target.value);
   };
 
   login = async (e) => {
     e.preventDefault();
-    let uri = `http://${process.env.AUTH_SERVER}/customer-login`;
+    let uri = `${process.env.AUTH_SERVER}/customer-login`;
     let option = {
       method: "POST",
       body: JSON.stringify({
@@ -66,7 +67,7 @@ export default class CustomerLogin extends Component {
     };
     let sendData = await fetch(uri, option);
     let result = await sendData.json();
-    console.log(result);
+    // console.log(result);
     if (!result.error) {
       cookie.set("KSa", result.token);
       this.setState({

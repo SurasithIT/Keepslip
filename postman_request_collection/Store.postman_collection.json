@@ -1,107 +1,148 @@
 {
-  "info": {
-    "_postman_id": "74127076-56ad-40dd-b424-093a1681d2d4",
-    "name": "Store",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-  },
-  "item": [
-    {
-      "name": "GET all stores",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://35.247.154.183:3002/api/store/stores/",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "3002",
-          "path": ["api", "store", "stores", ""]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "GET store by id",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://35.247.154.183:3002/api/store/store/1",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "3002",
-          "path": ["api", "store", "store", "1"]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "POST store",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Content-Type",
-            "name": "Content-Type",
-            "value": "application/json",
-            "type": "text"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n    \"id\":\"2\",\n    \"NID\":\"0105542062104\",\n    \"BusinessName\":\"บริษัท เอ-โฮสต์ จชน)\",\n    \"Branch_id\":\"00\",\n    \"StoreName\":\"บริษัท เอ-โฮสต์ จำ\",\n    \"Address\":\"อาคาร เอส เอ็ม ทาวเวอร์ ชั้นที่ 21 เลขที่ 979/52-55 ถนน พหลโยธิน ตำบล/แขวง พญาไท อำเภอ/เขต พญาไท จังหวัด กรุละมุง จังหวะ ชลบุรี\",\n    \"PostCode\":\"10400\",\n    \"Username\":\"A-HOST\",\n    \"Password\":\"12345\"\n }"
-        },
-        "url": {
-          "raw": "http://35.247.154.183:3002/api/store/store/",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "3002",
-          "path": ["api", "store", "store", ""]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "UPDATE store by id",
-      "request": {
-        "method": "PUT",
-        "header": [
-          {
-            "key": "Content-Type",
-            "name": "Content-Type",
-            "value": "application/json",
-            "type": "text"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n    \"NID\":\"0107557000462\",\n    \"BusinessName\":\"บริษัท คอมเซเว่น จำกัด (มหาชน)\",\n    \"Branch_id\":\"60\",\n    \"StoreName\":\"Studio 7\",\n    \"Address\":\"อาคาร ศูนย์การค้าเซ็นทรัลเฟสติวัล พัทยา บีช ชั้นที่ 3 ห้องที่303/1,303/2,303/3 เลขที่ 333/99 หมู่ที่ 9 ตำบล/แขวง หนองปรือ อำเภอ/เขต บางละมุง จังหวัด ชลบุรี\",\n    \"PostCode\":\"20260\",\n    \"Username\":\"Studio7Chon\",\n    \"Password\":\"12345\"\n }"
-        },
-        "url": {
-          "raw": "http://35.247.154.183:3002/api/store/store/1",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "3002",
-          "path": ["api", "store", "store", "1"]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "DELETE store by id",
-      "request": {
-        "method": "DELETE",
-        "header": [],
-        "url": {
-          "raw": "http://35.247.154.183:3002/api/store/store/2",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "3002",
-          "path": ["api", "store", "store", "2"]
-        }
-      },
-      "response": []
-    }
-  ],
-  "protocolProfileBehavior": {}
+	"info": {
+		"_postman_id": "74127076-56ad-40dd-b424-093a1681d2d4",
+		"name": "Store",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET all stores",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/api/keepslip/stores/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"keepslip",
+						"stores",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET store by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/api/keepslip/store/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"keepslip",
+						"store",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST store",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"NID\":\"0105542062104\",\n    \"StoreName\":\"A-HOST\",\n    \"BusinessName\": \"บริษัท เอ-โฮสต์ จำกัด\",\n    \"Branch_id\":\"0\",\n    \"BranchName\": \"บริษัท เอ-โฮสต์ จำกัด\",\n    \"Address\": \"อาคาร เอส เอ็ม ทาวเวอร์ ชั้นที่ 21 เลขที่ 979/52-55 ถนน พหลโยธิน ตำบล/แขวง พญาไท อำเภอ/เขต พญาไท จังหวัด กรุงเทพมหานคร\",\n    \"PostCode\": \"10400\",\n    \"Username\":\"A-HOST\",\n    \"Password\":\"12345\"\n }",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/api/keepslip/store/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"keepslip",
+						"store",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE store by id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"NID\":\"0105542062104\",\n    \"StoreName\":\"A-HOST\",\n    \"BusinessName\": \"บริษัท เอ-โฮสต์ จำกัด\",\n    \"Branch_id\":\"0\",\n    \"BranchName\": \"บริษัท เอ-โฮสต์ จำกัด\",\n    \"Address\": \"อาคาร เอส เอ็ม ทาวเวอร์ ชั้นที่ 21 เลขที่ 979/52-55 ถนน พหลโยธิน ตำบล/แขวง พญาไท อำเภอ/เขต พญาไท จังหวัด กรุงเทพมหานคร\",\n    \"PostCode\": \"10400\",\n    \"Username\":\"A-HOST\",\n    \"Password\":\"12345678\"\n }",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/api/keepslip/store/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"keepslip",
+						"store",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE store by id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/api/keepslip/store/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"keepslip",
+						"store",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
 }

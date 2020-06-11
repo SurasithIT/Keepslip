@@ -9,15 +9,15 @@ import Head from "next/head";
 export default class Receipts extends Component {
   static async getInitialProps(ctx) {
     const { KSa } = nextCookie(ctx);
-    console.log(KSa);
+    // console.log(KSa);
     let user;
 
     if (KSa) {
-      let userVerify = await fetch(`http://${process.env.AUTH_SERVER}/verify`, {
+      let userVerify = await fetch(`${process.env.AUTH_SERVER}/verify`, {
         headers: { Authorization: `${KSa}` },
       });
       user = await userVerify.json();
-      console.log(user);
+      // console.log(user);
       if (!user.error && user.user_id !== "") {
         return {
           user_id: user.user_id,

@@ -1,41 +1,47 @@
 {
-  "info": {
-    "_postman_id": "7a694252-3870-4b50-be93-fa27859f4f5b",
-    "name": "TheRevenueDepartment",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-  },
-  "item": [
-    {
-      "name": "GET store data",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Content-Type",
-            "name": "Content-Type",
-            "type": "text",
-            "value": "application/json"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n\t\"username\": \"anonymous\",\n\t\"password\": \"anonymous\",\n\t\"TIN\": \"0105542062104\",\n\t\"Name\": \"\", \n\t\"ProvinceCode\": \"0\",\n\t\"BranchNumber\": \"0\",\n\t\"AmphurCode\": \"0\"\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://35.247.154.183:3005/api/trd/storeFromTRD",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "3005",
-          "path": ["api", "trd", "storeFromTRD"]
-        }
-      },
-      "response": []
-    }
-  ],
-  "protocolProfileBehavior": {}
+	"info": {
+		"_postman_id": "53bb07c3-dd3c-4027-8a4c-11db23ff8430",
+		"name": "TheRevenueDepartment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET store data",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"anonymous\",\n\t\"password\": \"anonymous\",\n\t\"TIN\": \"0105542062104\",\n\t\"Name\": \"\", \n\t\"ProvinceCode\": \"0\",\n\t\"BranchNumber\": \"0\",\n\t\"AmphurCode\": \"0\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3003/api/trd/storeFromTRD",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"api",
+						"trd",
+						"storeFromTRD"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
 }

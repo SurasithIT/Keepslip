@@ -24,13 +24,13 @@ class ReceiptFull extends Component {
   componentDidMount = async (props) => {
     this.controller = new window.AbortController();
     const receiptFetch = await fetch(
-      `http://${process.env.SMART_CONTRACT_SERVER}/fullReceipt/${this.props.receipt_id}`,
+      `${process.env.SMART_CONTRACT_SERVER}/fullReceipt/${this.props.receipt_id}`,
       { signal: this.controller.signal }
     );
     const receipt = await receiptFetch.json();
 
     let total = 0;
-    console.log(receipt);
+    // console.log(receipt);
     for (let i = 0; i < receipt.items.length; i++) {
       total += receipt.items[i].price * receipt.items[i].amount;
     }
@@ -59,12 +59,12 @@ class ReceiptFull extends Component {
         newState.items[i].remainingDay = remainingDay;
         this.setState(newState);
       }
-      // console.log(this.state.items);
+      // // console.log(this.state.items);
     }
   };
 
   componentWillUnmount = () => {
-    console.log("componentWillUnmount");
+    // console.log("componentWillUnmount");
     this.controller.abort();
   };
   expireDate = (receiptDate, warrantyTime) => {
@@ -80,7 +80,7 @@ class ReceiptFull extends Component {
       (createTime + one_day * warrantyTime - timeNow) / one_day
     );
 
-    console.log((createTime + one_day * warrantyTime - timeNow) / one_day);
+    // console.log((createTime + one_day * warrantyTime - timeNow) / one_day);
     return remainingDay;
   };
 
@@ -134,9 +134,9 @@ class ReceiptFull extends Component {
       filename: "receipt.pdf",
     };
     import("dom-to-pdf").then((domToPdf) => {
-      console.log(domToPdf);
+      // console.log(domToPdf);
       domToPdf.default(this.refs.receipt, options, function () {
-        console.log("done");
+        // console.log("done");
       });
     });
   };

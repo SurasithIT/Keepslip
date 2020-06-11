@@ -4,11 +4,15 @@ import nextCookie from "next-cookies";
 import CustomerProfile from "../components/profile/customer";
 import StoreProfile from "../components/profile/store";
 import Router from "next/router";
+import Head from "next/head";
 
 const Profile = (props) => {
-  console.log("props", props);
+  // console.log("props", props);
   return (
     <Layout>
+      <Head>
+        <title>KeepSlip : {props.user.username}</title>
+      </Head>
       <div className="container">
         <div className="content">
           <b style={{ fontSize: "20px" }}>{props.user.username}</b>
@@ -76,9 +80,9 @@ const Profile = (props) => {
 Profile.getInitialProps = async (ctx) => {
   let user;
   const { KSa } = nextCookie(ctx);
-  // console.log(KSa);
+  // // console.log(KSa);
   if (KSa) {
-    let userVerify = await fetch(`http://${process.env.AUTH_SERVER}/verify`, {
+    let userVerify = await fetch(`${process.env.AUTH_SERVER}/verify`, {
       headers: { Authorization: `${KSa}` },
     });
     user = await userVerify.json();
@@ -86,42 +90,42 @@ Profile.getInitialProps = async (ctx) => {
     if (!user.error) {
       if (user.role == "customer") {
         let customerFetch = await fetch(
-          `http://${process.env.CUSTOMER_SERVER}/customerById/${user.user_id}`,
+          `${process.env.CUSTOMER_SERVER}/customerById/${user.user_id}`,
           {
             headers: { Authorization: `${KSa}` },
           }
         );
         let customer = await customerFetch.json();
-        // console.log(customer[0]);
+        // // console.log(customer[0]);
         return { user: user, customer: customer[0] };
       }
       if (user.role == "store") {
         let storeFetch = await fetch(
-          `http://${process.env.STORE_SERVER}/store/${user.user_id}`,
+          `${process.env.STORE_SERVER}/store/${user.user_id}`,
           {
             headers: { Authorization: `${KSa}` },
           }
         );
         let store = await storeFetch.json();
-        // console.log(store[0]);
+        // // console.log(store[0]);
         return { user: user, store: store[0] };
       }
       // return { user: user };
     } else {
       if (ctx.req) {
-        ctx.res.writeHead(302, { Location: "/Unauthorization" });
+        ctx.res.writeHead(302, { Location: "/unauthorization" });
         ctx.res.end();
       } else {
-        Router.push("/Unauthorization");
+        Router.push("/unauthorization");
       }
     }
     return { user: user };
   } else {
     if (ctx.req) {
-      ctx.res.writeHead(302, { Location: "/Unauthorization" });
+      ctx.res.writeHead(302, { Location: "/unauthorization" });
       ctx.res.end();
     } else {
-      Router.push("/Unauthorization");
+      Router.push("/unauthorization");
     }
   }
   //   return { user: user };

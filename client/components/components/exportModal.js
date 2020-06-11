@@ -6,7 +6,7 @@ export default class ExportModal extends Component {
   }
 
   render() {
-    // console.log(this.props);
+    // // console.log(this.props);
     return (
       <div className="modal">
         <div className="export-box">

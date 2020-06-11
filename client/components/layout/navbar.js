@@ -20,14 +20,14 @@ export default class Navbar extends Component {
   // static async getInitialProps(ctx) {
   componentDidMount = async () => {
     const KSa = cookie.get("KSa");
-    console.log(KSa);
+    // console.log(KSa);
     let user;
     if (KSa) {
-      let userVerify = await fetch(`http://${process.env.AUTH_SERVER}/verify`, {
+      let userVerify = await fetch(`${process.env.AUTH_SERVER}/verify`, {
         headers: { Authorization: `${KSa}` },
       });
       user = await userVerify.json();
-      console.log(user);
+      // console.log(user);
       if (!user.error) {
         this.setState({
           user: true,
@@ -73,17 +73,17 @@ export default class Navbar extends Component {
     }
 
     cookie.remove("KSa");
-    let uri = `http://${process.env.AUTH_SERVER}/logout`;
+    let uri = `${process.env.AUTH_SERVER}/logout`;
     let option = { method: "DELETE" };
     let sendData = await fetch(uri, option);
     let result = await sendData.json();
-    console.log(result);
+    // console.log(result);
     this.deleteDB();
     Router.push("/");
   };
 
   deleteDB = async () => {
-    console.log("delete DB called");
+    // console.log("delete DB called");
     let indexedDB;
     if (typeof window !== "undefined") {
       indexedDB =
@@ -95,16 +95,16 @@ export default class Navbar extends Component {
 
     // When i had the base open, the closure was blocked, so i left this here
     DBDeleteRequest.onblocked = function (event) {
-      console.log("Blocked");
+      // console.log("Blocked");
     };
 
     DBDeleteRequest.onerror = function (event) {
-      console.log("Error deleting database.");
-      console.log(event);
+      // console.log("Error deleting database.");
+      // console.log(event);
     };
 
     DBDeleteRequest.onsuccess = function (event) {
-      console.log("Database deleted successfully");
+      // console.log("Database deleted successfully");
     };
   };
 
@@ -116,6 +116,7 @@ export default class Navbar extends Component {
         <div className="home-link">
           <Link href="/">
             <button
+              className="projectname"
               style={{
                 border: 0,
                 borderRadius: "5px",
@@ -125,7 +126,10 @@ export default class Navbar extends Component {
                 padding: "5px",
               }}
             >
-              <img src="/src/KeelSlip_Icon.png" style={{ height: "32px" }} />{" "}
+              <div id="keepslip-logo">
+                <img src="/src/KeelSlip_Icon.png" style={{ height: "32px" }} />
+              </div>
+              <span id="keepslip-name"> KeepSlip </span>
             </button>
           </Link>
         </div>
@@ -177,6 +181,9 @@ export default class Navbar extends Component {
                 Store Login
               </button>
             </Link>
+            <Link href="/about">
+              <button>About</button>
+            </Link>
             <button
               onClick={this.logout}
               style={{
@@ -213,8 +220,17 @@ export default class Navbar extends Component {
             // display: flex;
             // flex-direction: row;
           }
+          #keepslip-logo {
+            margin-right: 10px;
+          }
           .home-link {
             margin-right: auto;
+          }
+          .projectname {
+            display: flex;
+            // justify-content: center;
+            align-items: center;
+            // height: 200px;
           }
           .user {
             margin: auto;
@@ -252,7 +268,13 @@ export default class Navbar extends Component {
             cursor: pointer;
           }
 
-          @media (max-width: 690px) {
+          @media (max-width: 930px) {
+            #keepslip-name {
+              display: none;
+            }
+            #keepslip-logo {
+              margin: 0px;
+            }
             .hamburger-nav {
               display: block;
               margin-left: auto;
@@ -269,7 +291,7 @@ export default class Navbar extends Component {
             .func {
               display: flex;
               position: fixed;
-              top: 65px;
+              top: 62px;
               right: 0%;
               text-align: center;
               flex-direction: column;

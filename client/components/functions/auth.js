@@ -3,14 +3,14 @@ import Router from "next/router";
 import fetch from "isomorphic-unfetch";
 async function auth() {
   const KSa = cookie.get("KSa");
-  console.log(KSa);
+  // console.log(KSa);
   let user;
   if (KSa) {
-    let userVerify = await fetch(`http://${process.env.AUTH_SERVER}/verify`, {
+    let userVerify = await fetch(`${process.env.AUTH_SERVER}/verify`, {
       headers: { Authorization: `${KSa}` },
     });
     user = await userVerify.json();
-    console.log(user);
+    // console.log(user);
     return user;
   } else {
     // Router.push("/unauthorization");

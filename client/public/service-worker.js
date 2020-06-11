@@ -1,17 +1,17 @@
-console.log("Service Worker Loaded...");
+// console.log("Service Worker Loaded...");
 const cacheName = "v1";
 
 const cacheAssets = ["src/KeelSlip_Icon.png"];
 
 // Call Install Event
 self.addEventListener("install", (e) => {
-  console.log("Service Worker: Installed");
+  // console.log("Service Worker: Installed");
 
   e.waitUntil(
     caches
       .open(cacheName)
       .then((cache) => {
-        console.log("Service Worker: Caching Files");
+        // console.log("Service Worker: Caching Files");
         cache.addAll(cacheAssets);
       })
       .then(() => self.skipWaiting())
@@ -20,14 +20,14 @@ self.addEventListener("install", (e) => {
 
 // Call Activate Event
 self.addEventListener("activate", (e) => {
-  console.log("Service Worker: Activated");
+  // console.log("Service Worker: Activated");
   // Remove unwanted caches
   e.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames.map((cache) => {
           if (cache !== cacheName) {
-            console.log("Service Worker: Clearing Old Cache");
+            // console.log("Service Worker: Clearing Old Cache");
             return caches.delete(cache);
           }
         })
@@ -38,7 +38,7 @@ self.addEventListener("activate", (e) => {
 
 // Call Fetch Event
 self.addEventListener("fetch", (e) => {
-  console.log("Service Worker: Fetching");
+  // console.log("Service Worker: Fetching");
   e.respondWith(fetch(e.request).catch(() => caches.match(e.request)));
 });
 
@@ -51,8 +51,8 @@ self.addEventListener("push", (e) => {
 });
 
 self.addEventListener("notificationclick", (e) => {
-  // console.log(e);
-  // console.log(e.notification.data);
+  // // console.log(e);
+  // // console.log(e.notification.data);
   let data = e.notification.data;
   var notification = e.notification;
   var action = e.action;
@@ -61,7 +61,7 @@ self.addEventListener("notificationclick", (e) => {
     notification.close();
   } else {
     clients.openWindow(
-      `http://localhost:3000/receipt?receipt_id=${data.rec_id}`
+      `https://keepslip.now.sh/receipt?receipt_id=${data.rec_id}`
     );
     notification.close();
   }
@@ -74,8 +74,8 @@ var notiIntervalList = [];
 self.addEventListener("message", function (event) {
   var data = JSON.parse(event.data);
 
-  console.log("SW Received Message:");
-  console.log(data);
+  // console.log("SW Received Message:");
+  // console.log(data);
 
   self.rec_id = data.rec_id;
   self.item_id = data.item_id;
@@ -84,12 +84,12 @@ self.addEventListener("message", function (event) {
   let one_day = 1000 * 60 * 60 * 24;
   self.notiTime = data.remain - 7 * one_day;
   let notiDay = self.notiTime + new Date().getTime();
-  // console.log("NotiTime", self.notiTime);
-  // console.log("NotiDay", new Date(notiDay));
+  // // console.log("NotiTime", self.notiTime);
+  // // console.log("NotiDay", new Date(notiDay));
 
   function showNoti() {
     if (self.notiTime > one_day) {
-      console.log("More than one day");
+      // console.log("More than one day");
       var sentNotiInterval = setInterval(() => {
         self.notiTime = self.notiTime - one_day;
         if (self.notiTime <= one_day) {
@@ -108,37 +108,37 @@ self.addEventListener("message", function (event) {
     }
 
     if (self.notiTime <= one_day) {
-      console.log("Less than one day");
+      // console.log("Less than one day");
       var sentNotiTimeout = setTimeout(() => {
         self.registration.showNotification(title, {
-          body: `Your Receipt ID: ${data.rec_id} Item: ${data.item_id} will expire in 7 days and`,
+          body: `Your Receipt ID: ${data.rec_id} Item: ${data.item_id} will expire in 7 days`,
           icon: "/src/KeelSlip_Icon.png",
           data: { rec_id: data.rec_id },
         });
         notiTimeoutList.push(sentNotiTimeout);
       }, self.notiTime);
     }
-    console.log(notiIntervalList);
-    console.log(notiTimeoutList);
+    // console.log(notiIntervalList);
+    // console.log(notiTimeoutList);
   }
 
   if (data.status == "sent") {
-    console.log(
-      `Your Receipt ID: ${data.rec_id} Item: ${data.item_id} will expire in ${
-        data.remain / one_day
-      } day`
-    );
+    // console.log(
+    //   `Your Receipt ID: ${data.rec_id} Item: ${data.item_id} will expire in ${
+    //     data.remain / one_day
+    //   } day`
+    // );
     showNoti();
   }
 
   if (data.status == "clear") {
-    console.log("Clear all Notification timeouts");
+    // console.log("Clear all Notification timeouts");
     for (const id of notiTimeoutList) {
-      console.log("Clear Timeout ID", id);
+      // console.log("Clear Timeout ID", id);
       clearTimeout(id);
     }
     for (const id of notiIntervalList) {
-      console.log("Clear Interval ID", id);
+      // console.log("Clear Interval ID", id);
       clearInterval(id);
     }
     notiTimeoutList = [];

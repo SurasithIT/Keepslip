@@ -89,39 +89,39 @@ const Receipt = (props) => (
 Receipt.getInitialProps = async (ctx) => {
   let user;
   const { KSa } = nextCookie(ctx);
-  console.log(KSa);
+  // console.log(KSa);
   if (KSa) {
-    let userVerify = await fetch(`http://${process.env.AUTH_SERVER}/verify`, {
+    let userVerify = await fetch(`${process.env.AUTH_SERVER}/verify`, {
       headers: { Authorization: `${KSa}` },
     });
     user = await userVerify.json();
-    console.log("user handle err", user);
+    // console.log("user handle err", user);
     // return user;
     let receipt_id = ctx.query.receipt_id;
-    const uri = `http://${process.env.RECEIPT_SERVER}/receipt/${receipt_id}`;
+    const uri = `${process.env.RECEIPT_SERVER}/receipt/${receipt_id}`;
     const res = await fetch(uri);
     const data = await res.json();
-    console.log(data);
     // console.log(data);
-    // console.log(user.user_id, user.role, data[0].Customer_id, data[0].Store_id);
+    // // console.log(data);
+    // // console.log(user.user_id, user.role, data[0].Customer_id, data[0].Store_id);
     if (user) {
-      console.log(user);
+      // console.log(user);
       return { receipt: data };
     } else {
       if (ctx.req) {
-        ctx.res.writeHead(302, { Location: "/Unauthorization" });
+        ctx.res.writeHead(302, { Location: "/unauthorization" });
         ctx.res.end();
       } else {
-        Router.push("/Unauthorization");
+        Router.push("/unauthorization");
       }
     }
     // return { receipt: data };
   } else {
     if (ctx.req) {
-      ctx.res.writeHead(302, { Location: "/Unauthorization" });
+      ctx.res.writeHead(302, { Location: "/unauthorization" });
       ctx.res.end();
     } else {
-      Router.push("/Unauthorization");
+      Router.push("/unauthorization");
     }
   }
 };
